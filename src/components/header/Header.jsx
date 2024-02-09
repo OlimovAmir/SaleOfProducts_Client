@@ -1,45 +1,82 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container';
+import { Button, Col, Container, Form, Navbar, Row } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import '../../styles/App.css';
+import logo from '../../images/logo.jpg';
+import { Route, Routes, BrowserRouter, Link, Navigate } from 'react-router-dom';
+import Home from './../../pages/Home';
+import About from './../../pages/About';
+import Contact from './../../pages/Contact';
+import Blog from './../../pages/Blog';
+
 
 function Header() {
     return (
-        <div>
-            <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-                <Container>
-                    <Navbar.Brand href="#home">My Company</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="#features">Analytics</Nav.Link>
-                            <Nav.Link href="#pricing">Setting</Nav.Link>
-                            <NavDropdown title="Documents" id="collapsible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Add a new CashExpense</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Add a new CashIncome</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Add a new employee</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown title="Journal" id="collapsible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.5">Viewing an CashExpense's log</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.6">Viewing an CashIncome's log</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.7">Viewing an employee's log</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.8"> Separated link </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav>
-                            <Nav.Link href="#deets">More deets</Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
-                                Dank memes
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </div>
+        <BrowserRouter>
+            <div>
+                <Navbar expand="lg" className="bg-dark" variant='dark'>
+                    <Container>
+
+                        <Navbar.Brand href="#home">
+                            <img
+                                src={logo}
+                                height="50"
+                                width="50"
+                                alt='Logo'
+                                style={{ borderRadius: '30%' }}
+                            />
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="me-auto">
+                                <Link to="/home" className="nav-link">Home</Link>
+                                <Link to="/about" className="nav-link">About as</Link>
+                                <Link to="/contact" className="nav-link">Contact</Link>
+                                <Link to="/blog" className="nav-link">Blog</Link>
+                                <Nav.Link href="#link" >Link</Nav.Link>
+                                <NavDropdown title={<span >Dropdown</span>} id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="#action/3.1" >Action</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2">
+                                        Another action
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.3" >Something</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="#action/3.4">
+                                        Separated link
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
+                        <Form inline>
+                            <Row>
+                                <Col xs="auto">
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Search"
+                                        className=" mr-sm-2"
+                                    />
+                                </Col>
+                                <Col xs="auto">
+                                    <Button type="submit">Submit</Button>
+                                </Col>
+                            </Row>
+                        </Form>
+                    </Container>
+                </Navbar>
+
+                <Routes default>
+                    <Route path="/" element={<Navigate to="/home" />} />
+                    <Route exact path="/home" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/blog" element={<Blog />} />
+                </Routes>
+
+
+
+            </div>
+        </BrowserRouter>
     )
 }
 
