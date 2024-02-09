@@ -2,9 +2,7 @@ import React from 'react'
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 
 import fotoDisigner from '../images/chip_shema_protsessor_140251_1280x720.jpg';
-import fotoDisigner2 from '../images/2.jpg';
 import fotoDisigner3 from '../images/3.jpg';
-import fotoDisigner4 from '../images/4.jpg';
 import fotoDisigner5 from '../images/5.jpg';
 import CashExpense from './CashExpense';
 
