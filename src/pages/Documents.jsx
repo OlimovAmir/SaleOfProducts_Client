@@ -1,10 +1,10 @@
 import React from 'react'
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 
-import fotoDisigner from '../images/chip_shema_protsessor_140251_1280x720.jpg';
 import fotoDisigner3 from '../images/3.jpg';
 import fotoDisigner5 from '../images/5.jpg';
 import CashExpense from './CashExpense';
+import FormUnit from '../form/FormUnit';
 
 function Documents() {
     return (
@@ -19,7 +19,7 @@ function Documents() {
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='second' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='unit' className="nav-link" style={{ textAlign: 'left' }}>
                                     Add Unit
                                 </Nav.Link>
                             </NavItem>
@@ -43,13 +43,10 @@ function Documents() {
                     <Col sm={10}>
                         <TabContent>
                             <TabPane eventKey='first'>
-                                <img
-                                    src={fotoDisigner}
-                                    className='img-fluid'
-                                    alt='fotoDisigner'
-                                />
+                                
                             </TabPane>
-                            <TabPane eventKey='second'>
+                            <TabPane eventKey='unit'>
+                                <FormUnit/>
                             </TabPane>
                             <TabPane eventKey='third'>
                                 <img
