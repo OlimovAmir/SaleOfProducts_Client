@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 function FormUnit() {
@@ -7,6 +7,9 @@ function FormUnit() {
   const [formData, setFormData] = useState({
     name: ''
   });
+  
+  // Состояние для отслеживания успешной отправки данных
+  const [isDataSent, setIsDataSent] = useState(false);
 
   // Обработчик события для обновления данных формы при изменении ввода
   const handleInputChange = (e) => {
@@ -23,6 +26,7 @@ function FormUnit() {
       .then(response => {
         // Обработка успешного ответа
         console.log('Данные успешно отправлены:', response.data);
+        setIsDataSent(true); // Устанавливаем флаг успешной отправки данных
         // По желанию, можно сбросить форму здесь
       })
       .catch(error => {
@@ -36,22 +40,25 @@ function FormUnit() {
       <Container style={{ width: '100vh' }}>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className='text-left'>Название юнита</Form.Label>
+            <Form.Label className='text-left'>Name unit</Form.Label>
             <Form.Control 
               type="text" 
-              placeholder="Введите название юнита" 
+              placeholder="Enter name unit" 
               name="name"
               value={formData.name}
               onChange={handleInputChange}
             />
-            <Form.Text className="text-muted">
-              Мы никогда не будем передавать вашу электронную почту кому-либо еще.
-            </Form.Text>
           </Form.Group>
           
           <Button variant="primary" type="submit">
-            Отправить
+            Добавить
           </Button>
+
+          {isDataSent && (
+            <Alert variant="success" className="mt-3">
+              Запись успешно произведен
+            </Alert>
+          )}
         </Form>
       </Container>
     </>
