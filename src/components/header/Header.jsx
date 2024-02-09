@@ -9,6 +9,7 @@ import Home from './../../pages/Home';
 import About from './../../pages/About';
 import Contact from './../../pages/Contact';
 import Blog from './../../pages/Blog';
+import Documents from '../../pages/Documents';
 
 
 function Header() {
@@ -32,6 +33,7 @@ function Header() {
                             <Nav className="me-auto">
                                 <Link to="/home" className="nav-link">Home</Link>
                                 <Link to="/about" className="nav-link">About as</Link>
+                                <Link to="/documents" className="nav-link">Documents</Link>
                                 <Link to="/contact" className="nav-link">Contact</Link>
                                 <Link to="/blog" className="nav-link">Blog</Link>
                                 <Nav.Link href="#link" >Link</Nav.Link>
@@ -69,6 +71,7 @@ function Header() {
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route exact path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/documents" element={<Documents />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>
