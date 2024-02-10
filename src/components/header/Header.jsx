@@ -44,9 +44,10 @@ function Header() {
                                     <NavDropdown.Item href="/documentsUnits">Unit</NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.3" >Supplier</NavDropdown.Item>
                                     <NavDropdown.Item href="/documents" >Customer</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >CashExpense</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >CashIncome</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >SaleProduct</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documents" >Cash Expense</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documents" >Cash Income</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documents" >Sale of Product</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documents" >Purchase of Product</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
                                 </NavDropdown>
