@@ -10,6 +10,7 @@ import About from './../../pages/About';
 import Contact from './../../pages/Contact';
 import Blog from './../../pages/Blog';
 import Documents from '../../pages/Documents';
+import DocumentsUnits from '../../pages/DocumentsUnits';
 
 
 function Header() {
@@ -33,15 +34,13 @@ function Header() {
                             <Nav className="me-auto">
                                 <Link to="/home" className="nav-link">Home</Link>
                                 <Link to="/about" className="nav-link">About as</Link>
-                                <Link to="/documents" className="nav-link">Documents</Link>
+                                <Link to="/documents" className="nav-link">Journal</Link>
                                 <Link to="/contact" className="nav-link">Contact</Link>
                                 <Link to="/blog" className="nav-link">Blog</Link>
                                 <Nav.Link href="#link" >Link</Nav.Link>
-                                <NavDropdown title={<span >Dropdown</span>} id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="#action/3.1" >Action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">
-                                        Another action
-                                    </NavDropdown.Item>
+                                <NavDropdown title={<span >Documents</span>} id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="/documents" >Employee</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentsUnits">Unit</NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.3" >Something</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">
@@ -72,6 +71,7 @@ function Header() {
                     <Route exact path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/documents" element={<Documents />} />
+                    <Route path="//documentsUnits" element={<DocumentsUnits />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>
