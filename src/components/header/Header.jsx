@@ -46,6 +46,7 @@ function Header() {
                                     <NavDropdown.Item href="/documents" >Customer</NavDropdown.Item>
                                     <NavDropdown.Item href="/documents" >CashExpense</NavDropdown.Item>
                                     <NavDropdown.Item href="/documents" >CashIncome</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documents" >SaleProduct</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
                                 </NavDropdown>
