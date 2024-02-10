@@ -11,6 +11,7 @@ import Contact from './../../pages/Contact';
 import Blog from './../../pages/Blog';
 import Documents from '../../pages/Documents';
 import DocumentsUnits from '../../pages/DocumentsUnits';
+import DocumentsEmployee from './../../pages/DocumentsEmployee';
 
 
 function Header() {
@@ -39,7 +40,7 @@ function Header() {
                                 <Link to="/blog" className="nav-link">Blog</Link>
                                 <Nav.Link href="#link" >Link</Nav.Link>
                                 <NavDropdown title={<span >Documents</span>} id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/documents" >Employee</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentEmployee" >Employee</NavDropdown.Item>
                                     <NavDropdown.Item href="/documents" >Product</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentsUnits">Unit</NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.3" >Supplier</NavDropdown.Item>
@@ -75,7 +76,8 @@ function Header() {
                     <Route exact path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/documents" element={<Documents />} />
-                    <Route path="//documentsUnits" element={<DocumentsUnits />} />
+                    <Route path="/documentEmployee" element={<DocumentsEmployee />} />
+                    <Route path="/documentsUnits" element={<DocumentsUnits />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>

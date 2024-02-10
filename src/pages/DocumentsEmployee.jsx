@@ -1,10 +1,9 @@
 import React from 'react'
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 
-import fotoDisigner3 from '../images/3.jpg';
-import fotoDisigner5 from '../images/5.jpg';
 import CashExpense from './CashExpense';
 import FormUnit from '../form/FormUnit';
+import FormEmployee from '../form/FormEmployee';
 
 function DocumentsEmployee() {
     return (
@@ -15,26 +14,26 @@ function DocumentsEmployee() {
                         <Nav variant='pills' className='flex-column mt-2'>
                             <NavItem>
                                 <Nav.Link eventKey='first' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Create Unit
+                                    Create Employee
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='unit' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Update Unit
+                                <Nav.Link eventKey='update' className="nav-link" style={{ textAlign: 'left' }}>
+                                    Update Employee
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='third' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Delete Unit
+                                <Nav.Link eventKey='delete' className="nav-link" style={{ textAlign: 'left' }}>
+                                    Delete Employee
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='fourth' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='getAll' className="nav-link" style={{ textAlign: 'left' }}>
                                     Get All List Units
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='fifth' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='setting' className="nav-link" style={{ textAlign: 'left' }}>
                                     Setting
                                 </Nav.Link>
                             </NavItem>
@@ -43,27 +42,19 @@ function DocumentsEmployee() {
                     <Col sm={10}>
                         <TabContent>
                             <TabPane eventKey='first'>
-                                
+                                <FormEmployee/>
                             </TabPane>
-                            <TabPane eventKey='unit'>
+                            <TabPane eventKey='update'>
                                 <FormUnit/>
                             </TabPane>
-                            <TabPane eventKey='third'>
-                                <img
-                                    src={fotoDisigner3}
-                                    className='img-fluid'
-                                    alt='fotoDisigner'
-                                />
+                            <TabPane eventKey='delete'>
+                                
                             </TabPane>
-                            <TabPane eventKey='fourth'>
+                            <TabPane eventKey='getAll'>
                                 <CashExpense />
                             </TabPane>
-                            <TabPane eventKey='fifth'>
-                                <img
-                                    src={fotoDisigner5}
-                                    className='img-fluid'
-                                    alt='fotoDisigner'
-                                />
+                            <TabPane eventKey='setting'>
+                                
                             </TabPane>
                         </TabContent>
                     </Col>
