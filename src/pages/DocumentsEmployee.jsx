@@ -1,9 +1,10 @@
 import React from 'react'
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 
-import CashExpense from './CashExpense';
+
 import FormUnit from '../form/FormUnit';
 import FormEmployee from '../form/FormEmployee';
+import FormGetAllEmployee from '../form/FormGetAllEmployee';
 
 function DocumentsEmployee() {
     return (
@@ -51,7 +52,7 @@ function DocumentsEmployee() {
                                 
                             </TabPane>
                             <TabPane eventKey='getAll'>
-                                <CashExpense />
+                                <FormGetAllEmployee/>
                             </TabPane>
                             <TabPane eventKey='setting'>
                                 
