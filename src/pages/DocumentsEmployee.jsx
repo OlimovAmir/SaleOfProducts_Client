@@ -14,7 +14,7 @@ function DocumentsEmployee() {
                         <Nav variant='pills' className='flex-column mt-2'>
                             <NavItem>
                                 <Nav.Link eventKey='first' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Create Employee
+                                To hire
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
@@ -29,7 +29,7 @@ function DocumentsEmployee() {
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='getAll' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Get All List Units
+                                    Get All List Employee
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
