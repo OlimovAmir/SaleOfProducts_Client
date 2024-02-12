@@ -12,6 +12,7 @@ import Blog from './../../pages/Blog';
 import Documents from '../../pages/Documents';
 import DocumentsUnits from '../../pages/DocumentsUnits';
 import DocumentsEmployee from './../../pages/DocumentsEmployee';
+import DocumentsProduct from '../../pages/DocumentsProduct';
 
 
 function Header() {
@@ -41,14 +42,12 @@ function Header() {
                                 <Nav.Link href="#link" >Statistics</Nav.Link>
                                 <NavDropdown title={<span >Documents</span>} id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/documentEmployee" >Employee</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >Product</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentProduct" >Product</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentsUnits">Unit</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.3" >Supplier</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >Customer</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >Cash Expense</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >Cash Income</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >Sale of Product</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documents" >Purchase of Product</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentSupplier" >Supplier</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentCustomer" >Customer</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentCash" >Cash</NavDropdown.Item>
+                                    
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
                                 </NavDropdown>
@@ -78,6 +77,7 @@ function Header() {
                     <Route path="/documents" element={<Documents />} />
                     <Route path="/documentEmployee" element={<DocumentsEmployee />} />
                     <Route path="/documentsUnits" element={<DocumentsUnits />} />
+                    <Route path="/documentProduct" element={<DocumentsProduct />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>
