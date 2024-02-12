@@ -37,8 +37,8 @@ function Header() {
                                 <Link to="/about" className="nav-link">About as</Link>
                                 <Link to="/documents" className="nav-link">Journal</Link>
                                 <Link to="/contact" className="nav-link">Contact</Link>
-                                <Link to="/blog" className="nav-link">Blog</Link>
-                                <Nav.Link href="#link" >Link</Nav.Link>
+                                <Link to="/blog" className="nav-link">Reports</Link>
+                                <Nav.Link href="#link" >Statistics</Nav.Link>
                                 <NavDropdown title={<span >Documents</span>} id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/documentEmployee" >Employee</NavDropdown.Item>
                                     <NavDropdown.Item href="/documents" >Product</NavDropdown.Item>

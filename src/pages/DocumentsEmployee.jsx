@@ -25,7 +25,7 @@ function DocumentsEmployee() {
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='delete' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Delete Employee
+                                Dismissal of an employee
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
