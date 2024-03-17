@@ -36,20 +36,19 @@ function Header() {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <Link to="/home" className="nav-link">{language === 'en' ? 'Home' : 'Домой'}</Link>
+                                <Link to="/home" className="nav-link">{language === 'en' ? 'Home' : 'Главное'}</Link>
                                 <Link to="/about" className="nav-link">{language === 'en' ? 'About us' : 'О нас'}</Link>
-                                <Link to="/documents" className="nav-link">Journal</Link>
-                                <Link to="/contact" className="nav-link">Contact</Link>
-                                <Link to="/blog" className="nav-link">Reports</Link>
-                                <Nav.Link href="#link" >Statistics</Nav.Link>
-                                <NavDropdown title={<span >Documents</span>} id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/documentEmployee" >Employee</NavDropdown.Item>
+                                <Link to="/documents" className="nav-link">{language === 'en' ? 'Journal' : 'Журналы'}</Link>
+                                <Link to="/contact" className="nav-link">{language === 'en' ? 'Contact' : 'Контакты'}</Link>
+                                <Link to="/blog" className="nav-link">{language === 'en' ? 'Reports' : 'Отчеты'}</Link>
+                                <Nav.Link href="#link" >{language === 'en' ? 'Statistics' : 'Статистика'}</Nav.Link>
+                                <NavDropdown title={<span >{language === 'en' ? 'Documents' : 'Документы'}</span>} id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="/documentEmployee" >{language === 'en' ? 'Employee' : 'Сотрудники'}</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentProduct" >Product</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentsUnits">Unit</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentSupplier" >Supplier</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentCustomer" >Customer</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentCash" >Cash</NavDropdown.Item>
-
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
                                 </NavDropdown>

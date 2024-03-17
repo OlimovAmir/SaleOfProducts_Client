@@ -1,13 +1,15 @@
 import React from 'react'
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
-
-
 import FormUnit from '../form/FormUnit';
 import FormEmployee from '../form/FormEmployee';
 import FormGetAllEmployee from '../form/FormGetAllEmployee';
 import FormCharacteristicProduct from '../form/FormCharacteristicProduct';
+import { useSelector } from 'react-redux';
+import LanguageSelector from '../utils/LanguageSelector.js';
+
 
 function DocumentsProduct() {
+    const language = useSelector(state => state.language.value);
     return (
         <>
             <TabContainer id='ledt-tabs-example' defaultActiveKey='first'>
@@ -16,7 +18,7 @@ function DocumentsProduct() {
                         <Nav variant='pills' className='flex-column mt-2'>
                             <NavItem>
                                 <Nav.Link eventKey='first' className="nav-link" style={{ textAlign: 'left' }}>
-                                Purchase of product
+                                {language === 'en' ? 'Purchase of product' : 'Покупка продукта'}
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
