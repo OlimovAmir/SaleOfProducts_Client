@@ -1,12 +1,9 @@
 import React from 'react'
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 import FormUnit from '../form/FormUnit';
-import FormEmployee from '../form/FormEmployee';
-import FormGetAllEmployee from '../form/FormGetAllEmployee';
-import FormCharacteristicProduct from '../form/FormCharacteristicProduct';
 import { useSelector } from 'react-redux';
-import LanguageSelector from '../utils/LanguageSelector.js';
 import GroupProduct from './groupProduct/GroupProduct.jsx';
+import GetAllProduct from './product/GetAllProduct.jsx';
 
 
 function DocumentsProduct() {
@@ -61,7 +58,7 @@ function DocumentsProduct() {
                                 
                             </TabPane>
                             <TabPane eventKey='getAll'>
-                                <FormGetAllEmployee/>
+                                <GetAllProduct/>
                             </TabPane>
                             <TabPane eventKey='GroupProduct'>
                                 <GroupProduct/>
