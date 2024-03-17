@@ -47,7 +47,7 @@ function Header() {
                                     <NavDropdown.Item href="/documentSupplier" >Supplier</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentCustomer" >Customer</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentCash" >Cash</NavDropdown.Item>
-                                    
+
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
                                 </NavDropdown>
@@ -64,6 +64,12 @@ function Header() {
                                 </Col>
                                 <Col xs="auto">
                                     <Button type="submit">Submit</Button>
+                                </Col>
+                                <Col xs="auto">
+                                    <Form.Select aria-label="Default select example">
+                                        <option value="1">En</option>
+                                        <option value="2">Ru</option>
+                                    </Form.Select>
                                 </Col>
                             </Row>
                         </Form>

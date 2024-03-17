@@ -5,6 +5,7 @@ import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react
 import FormUnit from '../form/FormUnit';
 import FormEmployee from '../form/FormEmployee';
 import FormGetAllEmployee from '../form/FormGetAllEmployee';
+import FormCharacteristicProduct from '../form/FormCharacteristicProduct';
 
 function DocumentsProduct() {
     return (
@@ -34,6 +35,11 @@ function DocumentsProduct() {
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
+                                <Nav.Link eventKey='CharacteristicProduct' className="nav-link" style={{ textAlign: 'left' }}>
+                                CharacteristicProduct
+                                </Nav.Link>
+                            </NavItem>
+                            <NavItem>
                                 <Nav.Link eventKey='setting' className="nav-link" style={{ textAlign: 'left' }}>
                                     Setting
                                 </Nav.Link>
@@ -53,6 +59,9 @@ function DocumentsProduct() {
                             </TabPane>
                             <TabPane eventKey='getAll'>
                                 <FormGetAllEmployee/>
+                            </TabPane>
+                            <TabPane eventKey='CharacteristicProduct'>
+                                <FormCharacteristicProduct/>
                             </TabPane>
                             <TabPane eventKey='setting'>
                                 
