@@ -1,7 +1,7 @@
 // LanguageSelector.js
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleLanguage } from '../redux/languageSlice';
+import { toggleLanguage } from '../redux/languageSlice.js';
 
 const LanguageSelector = () => {
   const dispatch = useDispatch();

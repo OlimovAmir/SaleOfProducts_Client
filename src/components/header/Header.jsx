@@ -44,13 +44,13 @@ function Header() {
                                 <Nav.Link href="#link" >{language === 'en' ? 'Statistics' : 'Статистика'}</Nav.Link>
                                 <NavDropdown title={<span >{language === 'en' ? 'Documents' : 'Документы'}</span>} id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/documentEmployee" >{language === 'en' ? 'Employee' : 'Сотрудники'}</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentProduct" >Product</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentsUnits">Unit</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentSupplier" >Supplier</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentCustomer" >Customer</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentCash" >Cash</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentProduct" >{language === 'en' ? 'Product' : 'Товар'}</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentsUnits">{language === 'en' ? 'Unit' : 'Ед. изм.'}</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentSupplier" >{language === 'en' ? 'Supplier' : 'Поставщик'}</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentCustomer" >{language === 'en' ? 'Customer' : 'Покупатель'}</NavDropdown.Item>
+                                    <NavDropdown.Item href="/documentCash" >{language === 'en' ? 'Cash' : 'Касса'}</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.4">{language === 'en' ? 'Setting' : 'Настройка'}</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>

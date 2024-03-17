@@ -23,27 +23,27 @@ function DocumentsProduct() {
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='update' className="nav-link" style={{ textAlign: 'left' }}>
-                                Sale of product
+                                {language === 'en' ? 'Sale of product' : 'Продажа продукта'}
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='delete' className="nav-link" style={{ textAlign: 'left' }}>
-                                Write-off product
+                                {language === 'en' ? 'Write-off product' : 'Списание продукта'}
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='getAll' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Get All List products
+                                {language === 'en' ? 'Get All List products' : 'Спикок всех продуктов'}
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='CharacteristicProduct' className="nav-link" style={{ textAlign: 'left' }}>
-                                CharacteristicProduct
+                                {language === 'en' ? 'Group product' : 'Спикок группа продуктов'}
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
                                 <Nav.Link eventKey='setting' className="nav-link" style={{ textAlign: 'left' }}>
-                                    Setting
+                                {language === 'en' ? 'Setting' : 'Настройка'}
                                 </Nav.Link>
                             </NavItem>
                         </Nav>
