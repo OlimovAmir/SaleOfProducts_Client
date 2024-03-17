@@ -13,9 +13,11 @@ import Documents from '../../pages/Documents';
 import DocumentsUnits from '../../pages/DocumentsUnits';
 import DocumentsEmployee from './../../pages/DocumentsEmployee';
 import DocumentsProduct from '../../pages/DocumentsProduct';
-
+import { useSelector } from 'react-redux';
+import LanguageSelector from '../../utils/LanguageSelector.js';
 
 function Header() {
+    const language = useSelector(state => state.language.value);
     return (
         <BrowserRouter>
             <div>
@@ -63,13 +65,20 @@ function Header() {
                                     />
                                 </Col>
                                 <Col xs="auto">
-                                    <Button type="submit">Submit</Button>
+                                    {language === 'en' ? (
+                                        <div>
+                                            <Button type="submit">Submit</Button>
+                                            <NavDropdown.Item href="#action/3.4">Setting</NavDropdown.Item>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <Button type="submit">Отправить</Button>
+                                            <NavDropdown.Item href="#action/3.4">Настройки</NavDropdown.Item>
+                                        </div>
+                                    )}
                                 </Col>
                                 <Col xs="auto">
-                                    <Form.Select aria-label="Default select example">
-                                        <option value="1">En</option>
-                                        <option value="2">Ru</option>
-                                    </Form.Select>
+                                    <LanguageSelector />
                                 </Col>
                             </Row>
                         </Form>
