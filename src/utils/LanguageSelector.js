@@ -1,12 +1,13 @@
+// LanguageSelector.js
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeLanguage } from '../reducers/languageSlice.js';
+import { toggleLanguage } from '../redux/languageSlice';
 
 const LanguageSelector = () => {
   const dispatch = useDispatch();
 
-  const handleChange = event => {
-    dispatch(changeLanguage(event.target.value));
+  const handleChange = () => {
+    dispatch(toggleLanguage());
   };
 
   return (

@@ -36,8 +36,8 @@ function Header() {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <Link to="/home" className="nav-link">Home</Link>
-                                <Link to="/about" className="nav-link">About as</Link>
+                                <Link to="/home" className="nav-link">{language === 'en' ? 'Home' : 'Домой'}</Link>
+                                <Link to="/about" className="nav-link">{language === 'en' ? 'About us' : 'О нас'}</Link>
                                 <Link to="/documents" className="nav-link">Journal</Link>
                                 <Link to="/contact" className="nav-link">Contact</Link>
                                 <Link to="/blog" className="nav-link">Reports</Link>
