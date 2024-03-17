@@ -6,6 +6,7 @@ import FormGetAllEmployee from '../form/FormGetAllEmployee';
 import FormCharacteristicProduct from '../form/FormCharacteristicProduct';
 import { useSelector } from 'react-redux';
 import LanguageSelector from '../utils/LanguageSelector.js';
+import GroupProduct from './groupProduct/GroupProduct.jsx';
 
 
 function DocumentsProduct() {
@@ -37,7 +38,7 @@ function DocumentsProduct() {
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='CharacteristicProduct' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='GroupProduct' className="nav-link" style={{ textAlign: 'left' }}>
                                 {language === 'en' ? 'Group product' : 'Спикок группа продуктов'}
                                 </Nav.Link>
                             </NavItem>
@@ -62,8 +63,8 @@ function DocumentsProduct() {
                             <TabPane eventKey='getAll'>
                                 <FormGetAllEmployee/>
                             </TabPane>
-                            <TabPane eventKey='CharacteristicProduct'>
-                                <FormCharacteristicProduct/>
+                            <TabPane eventKey='GroupProduct'>
+                                <GroupProduct/>
                             </TabPane>
                             <TabPane eventKey='setting'>
                                 
