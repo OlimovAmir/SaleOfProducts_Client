@@ -4,36 +4,30 @@ import axios from 'axios';
 
 function GroupProduct() {
     // Состояние для хранения списка должностей
-    const [positions, setPositions] = useState([]);
+    const [groups, setGroups] = useState([]);
 
     // Функция для загрузки данных о должностях из базы
-    const fetchPositions = () => {
+    const fetchGroups = () => {
         axios.get('http://localhost:5134/GroupProduct/AllItems')
             .then(response => {
                 // Устанавливаем полученные данные о должностях в состояние
-                setPositions(response.data);
+                setGroups(response.data);
             })
             .catch(error => {
                 console.error('Не удалось загрузить список должностей:', error);
             });
     };
-
     // Загрузка списка должностей при монтировании компонента
     useEffect(() => {
-        fetchPositions();
+        fetchGroups();
     }, []);
     return (
-
         <Container>
-      <h2>Группа продуктов</h2>
-      <ul>
-        {/* Рендерим элементы списка должностей */}
-        {positions.map(position => (
-          <li key={position.id}>{position.name}</li> 
-        ))}
-      </ul>
-    </Container>
-
+            <h2>Группа продуктов</h2>
+            <ul>
+                {groups.map(group => (<li key={group.id}>{group.name} </li>))}
+            </ul>
+        </Container>
     )
 }
 
