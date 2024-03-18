@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGroupSlice.js';
+import AddGroupForm from '../../form/AddGroupForm.jsx';
 
 function GroupProduct() {
     // Состояние для хранения списка должностей
@@ -22,12 +25,28 @@ function GroupProduct() {
     useEffect(() => {
         fetchGroups();
     }, []);
+
+    //-----модальное окно---------------------------------------------------------
+    const showModal = useSelector(selectShowModal);
+    const dispatch = useDispatch();
+
+    const handleClose = () => {
+        dispatch(setShowModal(false));
+    };
     return (
         <div>
             <div className=''>
-                <Button className='m-2' variant="secondary">Add Group</Button>
+                <Button className='m-2' variant="secondary" onClick={() => dispatch(setShowModal(true))}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
             </div>
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Group</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <AddGroupForm onClose={handleClose} />
+                </Modal.Body>
+            </Modal>
             <div>
                 <Container>
                     <h2>Группа продуктов</h2>
