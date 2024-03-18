@@ -28,7 +28,7 @@ function GetAllProduct() {
                 {products.map(product => (<li key={product.id}>
                 {product.name}
                 {': цена '}{product.price}{' сомони '}
-                {': к-во '}{product.quantity}{' кг. '}
+                {': к-во '}{product.quantity}{' '} {product.unit.name}
                 </li>))}
             </ul>
         </Container>
