@@ -1,21 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-
+import axios from 'axios';
 
 function AddGroupForm({ onSubmit, onClose }) {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        onSubmit();
-      };
+  const [formData, setFormData] = useState({
+    name: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Отправка данных на сервер
+      await axios.post('http://localhost:5134/GroupProduct/Create', formData);
+      // Вызов функции onSubmit для дополнительной обработки (например, закрытие модального окна)
+      onSubmit();
+    } catch (error) {
+      console.error('Ошибка при отправке данных:', error);
+      // Обработка ошибки (например, вывод сообщения об ошибке)
+    }
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
-      {/* Добавьте поля для заполнения формы */}
-      {/* Например: */}
       <Form.Group controlId="groupName">
         <Form.Label>Group Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter group name" />
+        <Form.Control
+          type="text"
+          name="name"
+          placeholder="Enter group name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
       </Form.Group>
-      {/* Добавьте другие поля, если необходимо */}
 
       <Button variant="primary" type="submit">
         Submit
@@ -24,7 +46,7 @@ function AddGroupForm({ onSubmit, onClose }) {
         Close
       </Button>
     </Form>
-  )
+  );
 }
 
-export default AddGroupForm
+export default AddGroupForm;

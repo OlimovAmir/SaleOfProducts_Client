@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGroupSlice.js';
 import AddGroupForm from '../../form/AddGroupForm.jsx';
 
-function GroupProduct() {
+function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
     // Состояние для хранения списка должностей
     const [groups, setGroups] = useState([]);
 
@@ -30,21 +30,23 @@ function GroupProduct() {
     const showModal = useSelector(selectShowModal);
     const dispatch = useDispatch();
 
-    const handleClose = () => {
+    const handleClose = () => { // Переименовали onClose на handleClose
         dispatch(setShowModal(false));
     };
+
     return (
         <div>
             <div className=''>
                 <Button className='m-2' variant="secondary" onClick={() => dispatch(setShowModal(true))}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
             </div>
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={handleClose}> {/* Использовали handleClose */}
                 <Modal.Header closeButton>
                     <Modal.Title>Add Group</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddGroupForm onClose={handleClose} />
+                    {/* Передаем функцию onSubmit в компонент AddGroupForm */}
+                    <AddGroupForm onSubmit={onSubmit} onClose={handleClose} /> {/* Использовали handleClose */}
                 </Modal.Body>
             </Modal>
             <div>
@@ -61,4 +63,4 @@ function GroupProduct() {
     )
 }
 
-export default GroupProduct
+export default GroupProduct;
