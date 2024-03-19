@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGroupSlice.js';
 import AddGroupForm from '../../form/AddGroupForm.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
     // Состояние для хранения списка должностей
@@ -56,7 +58,7 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
                     <ul>
                         {groups.map(group => (
                             <li key={group.id}>{group.name}
-                                <Button className='m-2' size="sm" variant="outline-danger">x</Button>
+                                <Button className='m-2' size="sm" variant="outline-danger"><FontAwesomeIcon icon={faTrash}/> </Button>
                             </li>))}
                     </ul>
                 </Container>
