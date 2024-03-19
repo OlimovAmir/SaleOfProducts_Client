@@ -1,0 +1,16 @@
+.groupListItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  .groupName {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+  }
+  
+  .groupActions {
+    margin-left: 10px; /* Регулируйте расстояние между иконками */
+  }

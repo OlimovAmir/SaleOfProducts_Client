@@ -7,6 +7,8 @@ import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGrou
 import AddGroupForm from '../../form/AddGroupForm.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import styles from './GroupProduct.module.css';
 
 function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
     // Состояние для хранения списка должностей
@@ -48,8 +50,7 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
                     <Modal.Title>Add Group</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* Передаем функцию onSubmit в компонент AddGroupForm */}
-                    <AddGroupForm onSubmit={onSubmit} onClose={handleClose} /> {/* Использовали handleClose */}
+                    <AddGroupForm onSubmit={onSubmit} onClose={handleClose} />
                 </Modal.Body>
             </Modal>
             <div>
@@ -57,9 +58,14 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
                     <h2>Группа продуктов</h2>
                     <ul>
                         {groups.map(group => (
-                            <li key={group.id}>{group.name}
-                                <Button className='m-2' size="sm" variant="outline-danger"><FontAwesomeIcon icon={faTrash}/> </Button>
-                            </li>))}
+                            <li key={group.id} className={styles.groupListItem}>
+                                <div className={styles.groupName}>{group.name}</div>
+                                <div className={styles.groupActions}>
+                                    <Button className='m-2' size="sm" variant="outline-danger"><FontAwesomeIcon icon={faTrash} /></Button>
+                                    <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </Container>
             </div>
