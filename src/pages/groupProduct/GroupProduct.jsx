@@ -39,7 +39,7 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
             <div className=''>
                 <Button className='m-2' variant="secondary" onClick={() => dispatch(setShowModal(true))}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
-                <Button className='m-2' variant="secondary">Delete Group</Button>
+
             </div>
             <Modal show={showModal} onHide={handleClose}> {/* Использовали handleClose */}
                 <Modal.Header closeButton>
@@ -54,7 +54,10 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
                 <Container>
                     <h2>Группа продуктов</h2>
                     <ul>
-                        {groups.map(group => (<li key={group.id}>{group.name} </li>))}
+                        {groups.map(group => (
+                            <li key={group.id}>{group.name}
+                                <Button className='m-2' size="sm" variant="outline-danger">x</Button>
+                            </li>))}
                     </ul>
                 </Container>
             </div>
