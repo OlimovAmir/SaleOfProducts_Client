@@ -4,11 +4,14 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { performAsyncOperation } from '../redux/thunk/successAsyncThunkSlice.js';
 import SuccessModal from '../components/SuccessModal.jsx';
+import { setShowModal } from '../redux/reducers/modalAddGroupSlice.js'; // Импорт экшена для установки состояния модального окна
+
 
 function AddGroupForm({ onSubmit, onClose }) {
     const [formData, setFormData] = useState({
         name: '',
     });
+    
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -18,21 +21,23 @@ function AddGroupForm({ onSubmit, onClose }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            // Отправка данных на сервер
             await axios.post('http://localhost:5134/GroupProduct/Create', formData);
-            // Вызов функции onSubmit для дополнительной обработки (например, закрытие модального окна)
             onSubmit();
+            dispatch(setShowModal(false)); // Закрыть модальное окно после успешной записи
         } catch (error) {
-            console.error('Ошибка при отправке данных:', error);
-            // Обработка ошибки (например, вывод сообщения об ошибке)
+            console.error('Error submitting data:', error);
         }
     };
-
-    //---------------------------------------------------------------------
     const dispatch = useDispatch();
+    const handleCloseModal = () => {
+        dispatch(setShowModal(false)); // Закрыть модальное окно
+        onClose(); // Закрыть форму или выполнить любые другие необходимые действия
+    };
 
     const handleSuccess = () => {
         dispatch(performAsyncOperation());
+        handleCloseModal(); // Закрыть модальное окно после успешной асинхронной операции
+        
     };
 
     return (
@@ -48,14 +53,9 @@ function AddGroupForm({ onSubmit, onClose }) {
                     required
                 />
             </Form.Group>
-
-            <Button variant="primary" type="submit" onClick={handleSuccess}>
-                Submit
-            </Button>
-            <SuccessModal />
-            <Button variant="secondary" onClick={onClose} className="ml-2">
-                Close
-            </Button>
+            <Button variant="primary" onClick={handleSuccess} type="submit">Submit</Button>
+            <SuccessModal/>
+            <Button variant="secondary" onClick={handleCloseModal} className="ml-2">Close</Button>
         </Form>
     );
 }

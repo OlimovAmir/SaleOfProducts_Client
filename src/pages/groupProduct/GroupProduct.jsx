@@ -11,21 +11,21 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 
 function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
-    // Состояние для хранения списка должностей
+    // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
 
-    // Функция для загрузки данных о должностях из базы
+    // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
         axios.get('http://localhost:5134/GroupProduct/AllItems')
             .then(response => {
-                // Устанавливаем полученные данные о должностях в состояние
+                // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
             })
             .catch(error => {
-                console.error('Не удалось загрузить список должностей:', error);
+                console.error('Не удалось загрузить список GroupProduct:', error);
             });
     };
-    // Загрузка списка должностей при монтировании компонента
+    // Загрузка списка GroupProduct при монтировании компонента
     useEffect(() => {
         fetchGroups();
     }, []);
