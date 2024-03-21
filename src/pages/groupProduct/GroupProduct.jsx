@@ -4,20 +4,21 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGroupSlice.js';
-
 import AddGroupForm from '../../form/AddGroupForm.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
+import SuccessModal from '../../components/SuccessModal.jsx';
 
 
-function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
+function GroupProduct({ onSubmit }) {
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
-    const [showModalSuccess, setShowModalSuccess] = useState(false); // Состояние для отображения модального окна
-    
-    
+    // Состояние для отображения модального окна добавления группы
+    const [showAddModal, setShowAddModal] = useState(false);
+    // Состояние для отображения модального окна об успешном удалении
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
@@ -35,11 +36,11 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
         fetchGroups();
     }, []);
 
-    //-----модальное окно---------------------------------------------------------
+    // Redux
     const showModal = useSelector(selectShowModal);
     const dispatch = useDispatch();
 
-    const handleClose = () => { // Переименовали onClose на handleClose
+    const handleClose = () => {
         dispatch(setShowModal(false));
     };
 
@@ -48,31 +49,29 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
             const updatedGroups = groups.filter(group => group.id !== groupId);
             setGroups(updatedGroups);
-            setShowModalSuccess(true); // Показываем модальное окно после успешного удаления
+            setShowSuccessModal(true); // Показываем модальное окно после успешного удаления
         } catch (error) {
             console.error('Ошибка при удалении объекта:', error);
-            // Обработка ошибок при удалении
         }
     };
 
-    const handleCloseModal = () => {
-        setShowModalSuccess(false); // Закрываем модальное окно
+    const handleCloseSuccessModal = () => {
+        setShowSuccessModal(false); // Закрываем модальное окно об успешном удалении
     };
 
 
     return (
         <div>
             <div className=''>
-                <Button className='m-2' variant="secondary" onClick={() => dispatch(setShowModal(true))}>Add Group</Button>
+                <Button className='m-2' variant="secondary" onClick={() => setShowAddModal(true)}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
-
             </div>
-            <Modal show={showModal} onHide={handleClose}> {/* Использовали handleClose */}
+            <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Group</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddGroupForm onSubmit={onSubmit} onClose={handleClose} />
+                    <AddGroupForm onSubmit={onSubmit} onClose={() => setShowAddModal(false)} />
                 </Modal.Body>
             </Modal>
             <div>
@@ -91,6 +90,7 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
                             </li>
                         ))}
                     </ul>
+                    <SuccessModal show={showSuccessModal} handleClose={handleCloseSuccessModal} />
                 </Container>
             </div>
             <div>
