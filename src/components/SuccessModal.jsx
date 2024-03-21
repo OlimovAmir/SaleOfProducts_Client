@@ -9,6 +9,7 @@ function SuccessModal() {
 
     const handleClose = () => {
         dispatch(setSuccessMessage(null)); // Сбрасываем сообщение об успешном выполнении операции
+        handleClose();
     };
     return (
         <Modal show={!!successMessage}>

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const successSlice = createSlice({
-  name: 'success', // Имя вашего среза состояния
+  name: 'success',
   initialState: {
     successMessage: null,
   },

@@ -4,15 +4,20 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGroupSlice.js';
+
 import AddGroupForm from '../../form/AddGroupForm.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 
+
 function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
+    const [showModalSuccess, setShowModalSuccess] = useState(false); // Состояние для отображения модального окна
+    
+    
 
     // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
@@ -40,16 +45,18 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
 
     const handleDelete = async (groupId) => {
         try {
-            // Выполняем запрос axios.delete
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
-            // Если запрос выполнен успешно, обновляем состояние
             const updatedGroups = groups.filter(group => group.id !== groupId);
             setGroups(updatedGroups);
+            setShowModalSuccess(true); // Показываем модальное окно после успешного удаления
         } catch (error) {
             console.error('Ошибка при удалении объекта:', error);
             // Обработка ошибок при удалении
         }
     };
+
+    
+
 
     return (
         <div>
