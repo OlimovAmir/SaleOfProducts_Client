@@ -55,7 +55,9 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
         }
     };
 
-    
+    const handleCloseModal = () => {
+        setShowModalSuccess(false); // Закрываем модальное окно
+    };
 
 
     return (
