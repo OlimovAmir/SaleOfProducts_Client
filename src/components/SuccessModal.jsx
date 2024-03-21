@@ -11,7 +11,7 @@ function SuccessModal() {
         dispatch(setSuccessMessage(null)); // Сбрасываем сообщение об успешном выполнении операции
     };
     return (
-        <Modal show={!!successMessage} onHide={handleClose}>
+        <Modal show={!!successMessage}>
             <Modal.Header closeButton>
                 <Modal.Title>Успех!</Modal.Title>
             </Modal.Header>

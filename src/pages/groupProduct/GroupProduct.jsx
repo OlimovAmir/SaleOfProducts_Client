@@ -38,6 +38,19 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
         dispatch(setShowModal(false));
     };
 
+    const handleDelete = async (groupId) => {
+        try {
+            // Выполняем запрос axios.delete
+            await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
+            // Если запрос выполнен успешно, обновляем состояние
+            const updatedGroups = groups.filter(group => group.id !== groupId);
+            setGroups(updatedGroups);
+        } catch (error) {
+            console.error('Ошибка при удалении объекта:', error);
+            // Обработка ошибок при удалении
+        }
+    };
+
     return (
         <div>
             <div className=''>
@@ -61,7 +74,9 @@ function GroupProduct({ onSubmit }) { // Изменили onClose на onSubmit
                             <li key={group.id} className={styles.groupListItem}>
                                 <div className={styles.groupName}>{group.name}</div>
                                 <div className={styles.groupActions}>
-                                    <Button className='m-2' size="sm" variant="outline-danger"><FontAwesomeIcon icon={faTrash} /></Button>
+                                    <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(group.id)}>
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
                                     <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
                                 </div>
                             </li>
