@@ -6,7 +6,7 @@ const successSlice = createSlice({
     show: false,
   },
   reducers: {
-    showModal: state => {
+    showModalSuccess: state => {
       state.show = true;
     },
     hideModal: state => {
@@ -15,6 +15,6 @@ const successSlice = createSlice({
   },
 });
 
-export const { showModal, hideModal } = successSlice.actions;
+export const { showModalSuccess, hideModal } = successSlice.actions;
 
 export default successSlice.reducer;

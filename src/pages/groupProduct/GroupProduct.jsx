@@ -4,7 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectShowModal, setShowModal } from '../../redux/reducers/modalAddGroupSlice.js';
-import { showModal as showSuccessModal, hideModal } from '../../redux/reducers/successSlice.js'; // Импортируем действия Redux
+import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import AddGroupForm from '../../form/AddGroupForm.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -40,26 +40,24 @@ function GroupProduct({ onSubmit }) {
     const dispatch = useDispatch();
     const [selectedGroup, setSelectedGroup] = useState(null); // Состояние для выбранной группы
 
-    const showModal = useSelector(selectShowModal);
-
     const handleCloseModal = () => {
         dispatch(hideModal());
         setSelectedGroup(null);
-      };
+    };
 
     const handleDelete = async (groupId) => {
         try {
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
             const updatedGroups = groups.filter(group => group.id !== groupId);
             setGroups(updatedGroups);
-            dispatch(showSuccessModal()); // Переименовали функцию showModal в showSuccessModal
+            dispatch(showModalSuccess()); // Переименовали функцию showModal в showSuccessModal
             setSelectedGroup(groupId);
         } catch (error) {
             console.error('Ошибка при удалении объекта:', error);
         }
     };
 
-   
+
     return (
         <div>
             <div className=''>
