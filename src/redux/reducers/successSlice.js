@@ -3,14 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const successSlice = createSlice({
   name: 'success',
   initialState: {
-    successMessage: null,
+    show: false,
   },
   reducers: {
-    setSuccessMessage(state, action) {
-      state.successMessage = action.payload;
+    showModal: state => {
+      state.show = true;
+    },
+    hideModal: state => {
+      state.show = false;
     },
   },
 });
 
-export const { setSuccessMessage } = successSlice.actions;
+export const { showModal, hideModal } = successSlice.actions;
+
 export default successSlice.reducer;

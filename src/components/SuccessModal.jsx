@@ -1,22 +1,13 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
-import { setSuccessMessage } from '../redux/reducers/successSlice.js';
 
-function SuccessModal() {
-    const successMessage = useSelector(state => state.success.successMessage);
-    const dispatch = useDispatch();
-
-    const handleClose = () => {
-        dispatch(setSuccessMessage(null)); // Сбрасываем сообщение об успешном выполнении операции
-        handleClose();
-    };
+function SuccessModal({ show, handleClose }) {
     return (
-        <Modal show={!!successMessage}>
+        <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Успех!</Modal.Title>
+                <Modal.Title>Успешно!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{successMessage}</Modal.Body>
+            <Modal.Body>Операция успешно завершена.</Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Закрыть
