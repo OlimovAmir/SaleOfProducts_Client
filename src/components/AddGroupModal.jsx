@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setShowModal } from './modalAddGroupSlice';
+import { setShowModal } from '../redux/reducers/modalAddGroupSlice';
 
 function AddGroupModal({ showAddModal, handleClose }) {
   const dispatch = useDispatch();

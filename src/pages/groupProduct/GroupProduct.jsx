@@ -9,11 +9,14 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
+import AddGroupModal from '../../components/AddGroupModal.jsx';
+
 
 
 function GroupProduct({ onSubmit }) {
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
+    const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
 
     // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
@@ -52,12 +55,16 @@ function GroupProduct({ onSubmit }) {
         }
     };
 
+    const handleShowAddModal = () => {
+        setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
+    };
 
     return (
         <div>
             <div className=''>
-                <Button className='m-2' variant="secondary">Add Group</Button>
+            <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
+                <AddGroupModal showAddModal={showAddModal} handleClose={() => setShowAddModal(false)} />
             </div>
             <div>
                 <Container>
