@@ -12,18 +12,22 @@ function AddGroupModal({ showAddModal, handleClose }) {
     try {
       // Отправляем POST-запрос с помощью Axios
       await axios.post('http://localhost:5134/GroupProduct/Create', {
-        groupName: groupName
+        name: groupName
+      }).then(() => {
+        // Если запрос успешен, закрываем модальное окно
+        handleClose();
+        // Выводим сообщение об успешном создании элемента
+        alert('Element successfully created!');
       });
-
-      // Если запрос успешен, закрываем модальное окно
-      handleClose();
     } catch (error) {
+      // Выводим сообщение об ошибке
       console.error('Ошибка при отправке данных:', error);
+      alert('Произошла ошибка при отправке данных на сервер');
     }
   };
 
   return (
-    <Modal show={showAddModal} onHide={() => dispatch(setShowModal(false))}>
+    <Modal show={showAddModal} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Add Group</Modal.Title>
       </Modal.Header>
@@ -39,7 +43,7 @@ function AddGroupModal({ showAddModal, handleClose }) {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => dispatch(setShowModal(false))}>
+        <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
         <Button variant="primary" onClick={handleAddGroup}>

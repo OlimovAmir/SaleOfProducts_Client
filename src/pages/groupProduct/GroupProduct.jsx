@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container} from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
@@ -62,7 +62,7 @@ function GroupProduct({ onSubmit }) {
     return (
         <div>
             <div className=''>
-            <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
+                <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
                 <AddGroupModal showAddModal={showAddModal} handleClose={() => setShowAddModal(false)} />
             </div>
