@@ -59,12 +59,20 @@ function GroupProduct({ onSubmit }) {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
 
+    const addNewGroup = (newGroup) => {
+        setGroups([...groups, newGroup]);
+    };
+
     return (
         <div>
             <div className=''>
                 <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
                 <Button variant="secondary">Add Name Characteristik</Button>
-                <AddGroupModal showAddModal={showAddModal} handleClose={() => setShowAddModal(false)} />
+                <AddGroupModal
+                    showAddModal={showAddModal}
+                    handleClose={() => setShowAddModal(false)}
+                    addNewGroup={addNewGroup} // Передаем функцию в AddGroupModal
+                />
             </div>
             <div>
                 <Container>
