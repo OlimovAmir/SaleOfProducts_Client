@@ -17,6 +17,7 @@ function GroupProduct({ onSubmit }) {
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
+    const [groupId, setGroupId] = useState('');
 
     // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
@@ -60,7 +61,8 @@ function GroupProduct({ onSubmit }) {
     };
 
     const addNewGroup = (newGroup) => {
-        setGroups([...groups, newGroup]);
+        // Предположим, что newGroup содержит уникальный идентификатор id
+        setGroups([...groups, { ...newGroup, id: newGroup.id }]);
     };
 
     return (
@@ -72,23 +74,32 @@ function GroupProduct({ onSubmit }) {
                     showAddModal={showAddModal}
                     handleClose={() => setShowAddModal(false)}
                     addNewGroup={addNewGroup} // Передаем функцию в AddGroupModal
+                    groupId={groupId}
                 />
             </div>
             <div>
                 <Container>
                     <h2>Группа продуктов</h2>
                     <ul>
-                        {groups.map(group => (
-                            <li key={group.id} className={styles.groupListItem}>
-                                <div className={styles.groupName}>{group.name}</div>
-                                <div className={styles.groupActions}>
-                                    <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(group.id)}>
-                                        <FontAwesomeIcon icon={faTrash} />
-                                    </Button>
-                                    <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
-                                </div>
-                            </li>
-                        ))}
+                        {groups.length > 0 && groups.map(group => {
+                            if (group.id) {
+                                console.log('Key:', group.id);
+                                return (
+                                    <li key={group.id} className={styles.groupListItem}>
+                                        <div className={styles.groupName}>{group.name}</div>
+                                        <div className={styles.groupActions}>
+                                            <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(group.id)}>
+                                                <FontAwesomeIcon icon={faTrash} />
+                                            </Button>
+                                            <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
+                                        </div>
+                                    </li>
+                                );
+                            } else {
+                                console.warn('Invalid id for group:', group);
+                                return null; // Пропускаем элемент списка с недопустимым id
+                            }
+                        })}
                     </ul>
                     <SuccessModal show={selectedGroup !== null} handleClose={handleCloseModal} />
                 </Container>
