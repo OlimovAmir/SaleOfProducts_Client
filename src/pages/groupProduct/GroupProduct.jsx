@@ -59,7 +59,7 @@ function GroupProduct({ onSubmit }) {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
 
-    
+
     return (
         <div>
             <div className=''>
@@ -68,9 +68,7 @@ function GroupProduct({ onSubmit }) {
                 <AddGroupModal
                     showAddModal={showAddModal}
                     handleClose={() => setShowAddModal(false)}
-                
-                updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
-
+                    updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
                 />
             </div>
             <div>
@@ -79,7 +77,6 @@ function GroupProduct({ onSubmit }) {
                     <ul>
                         {groups.length > 0 && groups.map(group => {
                             if (group.id) {
-                                console.log('Key:', group.id);
                                 return (
                                     <li key={group.id} className={styles.groupListItem}>
                                         <div className={styles.groupName}>{group.name}</div>
