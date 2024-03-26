@@ -54,7 +54,7 @@ function Header() {
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
-                        <Form inline>
+                        <Form inline="true">
                             <Row>
                                 <Col xs="auto">
                                     <Form.Control

@@ -17,7 +17,6 @@ function GroupProduct({ onSubmit }) {
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
-    const [groupId, setGroupId] = useState('');
 
     // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
@@ -60,11 +59,7 @@ function GroupProduct({ onSubmit }) {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
 
-    const addNewGroup = (newGroup) => {
-        // Предположим, что newGroup содержит уникальный идентификатор id
-        setGroups([...groups, { ...newGroup, id: newGroup.id }]);
-    };
-
+    
     return (
         <div>
             <div className=''>
@@ -73,8 +68,9 @@ function GroupProduct({ onSubmit }) {
                 <AddGroupModal
                     showAddModal={showAddModal}
                     handleClose={() => setShowAddModal(false)}
-                    addNewGroup={addNewGroup} // Передаем функцию в AddGroupModal
-                    groupId={groupId}
+                
+                updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
+
                 />
             </div>
             <div>

@@ -3,10 +3,9 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 
 
-function AddGroupModal({ showAddModal, handleClose, addNewGroup, groupId }) {
+function AddGroupModal({ showAddModal, handleClose, groupId, updateGroupList }) {
 
   const [groupName, setGroupName] = useState('');
-  const [groups, setGroups] = useState([]);
 
   const handleAddGroup = async () => {
     try {
@@ -16,8 +15,7 @@ function AddGroupModal({ showAddModal, handleClose, addNewGroup, groupId }) {
         groupId: groupId // Используйте groupId, переданный как пропс
       });
       // Если запрос успешен, закрываем модальное окно и обновляем состояние groups
-
-      addNewGroup(response.data); // Вызываем функцию для обновления состояния groups
+      updateGroupList();
       // Выводим сообщение об успешном создании элемента
       alert('Element successfully created!');
       handleClose();
