@@ -7,6 +7,7 @@ import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.j
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faList } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
@@ -64,7 +65,6 @@ function GroupProduct({ onSubmit }) {
         <div>
             <div className=''>
                 <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
-                <Button variant="secondary">Add Name Characteristik</Button>
                 <AddGroupModal
                     showAddModal={showAddModal}
                     handleClose={() => setShowAddModal(false)}
@@ -85,6 +85,7 @@ function GroupProduct({ onSubmit }) {
                                                 <FontAwesomeIcon icon={faTrash} />
                                             </Button>
                                             <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
+                                            <Button className='m-2' size="sm" variant="secondary">   <FontAwesomeIcon icon={faList} /> Add Name Characteristik</Button>
                                         </div>
                                     </li>
                                 );
