@@ -25,6 +25,7 @@ function GroupProduct({ onSubmit }) {
             .then(response => {
                 // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Не удалось загрузить список GroupProduct:', error);
@@ -46,15 +47,16 @@ function GroupProduct({ onSubmit }) {
 
     const handleDelete = async (groupId) => {
         try {
+            console.log(groupId)
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
-            const updatedGroups = groups.filter(group => group.id !== groupId);
-            setGroups(updatedGroups);
-            dispatch(showModalSuccess()); // Переименовали функцию showModal в showSuccessModal
+            setGroups(prevGroups => prevGroups.filter(group => group.id !== groupId)); // Используем функцию обновления состояния
+            dispatch(showModalSuccess());
             setSelectedGroup(groupId);
         } catch (error) {
             console.error('Ошибка при удалении объекта:', error);
         }
     };
+
 
     const handleShowAddModal = () => {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
@@ -76,12 +78,17 @@ function GroupProduct({ onSubmit }) {
                     <h2>Группа продуктов</h2>
                     <ul>
                         {groups.length > 0 && groups.map(group => {
-                            if (group.id) {
+                            if (group && group.name) {
                                 return (
                                     <li key={group.id} className={styles.groupListItem}>
                                         <div className={styles.groupName}>{group.name}</div>
                                         <div className={styles.groupActions}>
-                                            <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(group.id)}>
+                                            <Button
+                                                className='m-2'
+                                                size="sm"
+                                                variant="outline-danger"
+                                                onClick={() => handleDelete(group.id)}
+                                            >
                                                 <FontAwesomeIcon icon={faTrash} />
                                             </Button>
                                             <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
@@ -90,10 +97,11 @@ function GroupProduct({ onSubmit }) {
                                     </li>
                                 );
                             } else {
-                                console.warn('Invalid id for group:', group);
-                                return null; // Пропускаем элемент списка с недопустимым id
+                                console.warn('Invalid group object:', group);
+                                return null; // Пропускаем элемент списка, если он не содержит свойство 'name'
                             }
                         })}
+
                     </ul>
                     <SuccessModal show={selectedGroup !== null} handleClose={handleCloseModal} />
                 </Container>
