@@ -25,7 +25,7 @@ function GroupProduct({ onSubmit }) {
             .then(response => {
                 // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
-                console.log(response.data);
+                
             })
             .catch(error => {
                 console.error('Не удалось загрузить список GroupProduct:', error);
@@ -47,7 +47,7 @@ function GroupProduct({ onSubmit }) {
 
     const handleDelete = async (groupId) => {
         try {
-            console.log(groupId)
+            
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
             setGroups(prevGroups => prevGroups.filter(group => group.id !== groupId)); // Используем функцию обновления состояния
             dispatch(showModalSuccess());
