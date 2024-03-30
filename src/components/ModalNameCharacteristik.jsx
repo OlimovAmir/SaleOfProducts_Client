@@ -39,6 +39,7 @@ function ModalNameCharacteristik({ showAddModal, handleClose, groupId, updateGro
             onChange={(e) => setGroupName(e.target.value)}
           />
         </Form.Group>
+        
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
