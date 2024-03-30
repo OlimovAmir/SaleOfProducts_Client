@@ -11,6 +11,8 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
+import { showModalNameCharacteristik, hideModalNameCharacteristik } from '../../redux/reducers/NameCharacteristikSlice.js';
+import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.jsx';
 
 
 
@@ -18,14 +20,14 @@ function GroupProduct({ onSubmit }) {
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
-
+    const [showModalName, setShowModalName] = useState(false);
     // Функция для загрузки данных о GroupProduct из базы
     const fetchGroups = () => {
         axios.get('http://localhost:5134/GroupProduct/AllItems')
             .then(response => {
                 // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
-                
+
             })
             .catch(error => {
                 console.error('Не удалось загрузить список GroupProduct:', error);
@@ -47,7 +49,7 @@ function GroupProduct({ onSubmit }) {
 
     const handleDelete = async (groupId) => {
         try {
-            
+
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
             setGroups(prevGroups => prevGroups.filter(group => group.id !== groupId)); // Используем функцию обновления состояния
             dispatch(showModalSuccess());
@@ -61,6 +63,11 @@ function GroupProduct({ onSubmit }) {
     const handleShowAddModal = () => {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
+
+    const handleNameCha = () => {
+        setShowModalName(true); // Вызываем действие для показа модального окна
+    };
+
 
 
     return (
@@ -92,7 +99,15 @@ function GroupProduct({ onSubmit }) {
                                                 <FontAwesomeIcon icon={faTrash} />
                                             </Button>
                                             <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
-                                            <Button className='m-2' size="sm" variant="secondary">   <FontAwesomeIcon icon={faList} /> Add Name Characteristik</Button>
+                                            <Button
+                                                className='m-2'
+                                                size="sm"
+                                                variant="secondary"
+                                                onClick={handleNameCha}
+                                            >
+                                                <FontAwesomeIcon icon={faList} /> Add Name Characteristik
+                                            </Button>
+                                           
                                         </div>
                                     </li>
                                 );
@@ -104,6 +119,10 @@ function GroupProduct({ onSubmit }) {
 
                     </ul>
                     <SuccessModal show={selectedGroup !== null} handleClose={handleCloseModal} />
+                    <ModalNameCharacteristik
+                                                show={showModalName}
+                                                handleClose={() => setShowModalName(false)}
+                                            />
                 </Container>
             </div>
         </div>

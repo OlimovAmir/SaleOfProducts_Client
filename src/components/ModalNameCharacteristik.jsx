@@ -2,7 +2,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import React, { useState } from 'react';
 
-function ModalNameCharacteristik({ showAddModal, handleClose, groupId, updateGroupList }) {
+function ModalNameCharacteristik({ show, handleClose }) { // Измените showAddModal на show
   const [groupName, setGroupName] = useState('');
 
   const handleAddGroup = async () => {
@@ -10,10 +10,10 @@ function ModalNameCharacteristik({ showAddModal, handleClose, groupId, updateGro
       // Отправляем POST-запрос с помощью Axios
       const response = await axios.post('http://localhost:5134/GroupProduct/Create', {
         name: groupName,
-        groupId: groupId // Используйте groupId, переданный как пропс
+        
       });
       // Если запрос успешен, закрываем модальное окно и обновляем состояние groups
-      updateGroupList();
+      
       // Выводим сообщение об успешном создании элемента
       alert('Element successfully created!');
       handleClose();
@@ -25,7 +25,7 @@ function ModalNameCharacteristik({ showAddModal, handleClose, groupId, updateGro
   };
 
   return (
-    <Modal show={showAddModal} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose}> 
       <Modal.Header closeButton>
         <Modal.Title>Add Group</Modal.Title>
       </Modal.Header>
@@ -39,18 +39,18 @@ function ModalNameCharacteristik({ showAddModal, handleClose, groupId, updateGro
             onChange={(e) => setGroupName(e.target.value)}
           />
         </Form.Group>
-        
+
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
         <Button variant="primary" onClick={handleAddGroup}>
-          Add Group
+          Add 
         </Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export default ModalNameCharacteristik
+export default ModalNameCharacteristik;
