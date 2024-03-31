@@ -107,7 +107,7 @@ function GroupProduct({ onSubmit }) {
                                             >
                                                 <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                             </Button>
-                                           
+
                                         </div>
                                     </li>
                                 );
@@ -116,13 +116,12 @@ function GroupProduct({ onSubmit }) {
                                 return null; // Пропускаем элемент списка, если он не содержит свойство 'name'
                             }
                         })}
-
                     </ul>
                     <SuccessModal show={selectedGroup !== null} handleClose={handleCloseModal} />
                     <ModalNameCharacteristik
-                                                show={showModalName}
-                                                handleClose={() => setShowModalName(false)}
-                                            />
+                        show={showModalName}
+                        handleClose={() => setShowModalName(false)}
+                    />
                 </Container>
             </div>
         </div>
