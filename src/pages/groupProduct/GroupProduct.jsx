@@ -64,11 +64,13 @@ function GroupProduct({ onSubmit }) {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
 
-    const handleNameCha = () => {
+    const handleNameCha = (groupId) => {
+        setSelectedGroupId(groupId);
         setShowModalName(true); // Вызываем действие для показа модального окна
     };
 
-
+    const [selectedGroupId, setSelectedGroupId] = useState(null);
+    
 
     return (
         <div>
@@ -103,11 +105,10 @@ function GroupProduct({ onSubmit }) {
                                                 className='m-2'
                                                 size="sm"
                                                 variant="secondary"
-                                                onClick={handleNameCha}
+                                                onClick={() => handleNameCha(group.id)} // Передаем groupId
                                             >
                                                 <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                             </Button>
-
                                         </div>
                                     </li>
                                 );
@@ -121,6 +122,7 @@ function GroupProduct({ onSubmit }) {
                     <ModalNameCharacteristik
                         show={showModalName}
                         handleClose={() => setShowModalName(false)}
+                        groupId={selectedGroupId} // Передаем groupId в компонент ModalNameCharacteristik
                     />
                 </Container>
             </div>
