@@ -1,12 +1,12 @@
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/header/Header';
+import RegistrationForm from './form/RegistrationForm';
 
 function App() {
   return (
     <div className="App">
       <header className="">
-        <Header/>
+        <RegistrationForm/>
       </header>
       
     </div>
