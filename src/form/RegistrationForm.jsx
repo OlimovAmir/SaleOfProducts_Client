@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import { Button, Container } from 'react-bootstrap';
+
 
 function RegistrationForm({ onRegistrationSuccess }) {
     const [username, setUsername] = useState('');
@@ -35,33 +40,37 @@ function RegistrationForm({ onRegistrationSuccess }) {
         }
     };
     return (
+        <Container className='mt-5'>
+            <Row>
+                <Col xs={6} md={4}>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group as={Row} className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label column sm="2">Username:</Form.Label>
+                            <Col sm="10">
+                                <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                            <Form.Label column sm="2"> Password: </Form.Label>
+                            <Col sm="10">
+                                <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                            </Col>
+                        </Form.Group>
+
+                        <Button type="submit">Log in</Button>
+                    </Form>
+                </Col>
+            </Row>
+
+
+            { /* {accessToken && (
         <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="submit">Get Tokens</button>
-      </form>
-      {accessToken && (
-        <div>
-          <p>Access Token: {accessToken}</p>
-          <p>Refresh Token: {refreshToken}</p>
+           <p>Access Token: {accessToken}</p>
+           <p>Refresh Token: {refreshToken}</p>
         </div>
-      )}
-    </div>
+      )} */}
+        </Container>
     )
 }
 
