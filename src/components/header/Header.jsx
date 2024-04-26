@@ -15,6 +15,7 @@ import DocumentsEmployee from './../../pages/DocumentsEmployee';
 import DocumentsProduct from '../../pages/DocumentsProduct';
 import { useSelector } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
+import RegistrationForm from '../../form/RegistrationForm.jsx';
 
 function Header() {
     const language = useSelector(state => state.language.value);
@@ -85,8 +86,9 @@ function Header() {
                 </Navbar>
 
                 <Routes default>
-                    <Route path="/" element={<Navigate to="/home" />} />
-                    <Route exact path="/home" element={<Home />} />
+                    <Route path="/" element={<Navigate to="/register" />} />
+                    <Route exact path="/register" element={<RegistrationForm />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/documents" element={<Documents />} />
                     <Route path="/documentEmployee" element={<DocumentsEmployee />} />

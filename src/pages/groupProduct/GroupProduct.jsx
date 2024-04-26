@@ -11,7 +11,6 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
-import { showModalNameCharacteristik, hideModalNameCharacteristik } from '../../redux/reducers/NameCharacteristikSlice.js';
 import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.jsx';
 
 
@@ -27,12 +26,13 @@ function GroupProduct({ onSubmit }) {
             .then(response => {
                 // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
-
             })
             .catch(error => {
                 console.error('Не удалось загрузить список GroupProduct:', error);
             });
     };
+
+
     // Загрузка списка GroupProduct при монтировании компонента
     useEffect(() => {
         fetchGroups();
