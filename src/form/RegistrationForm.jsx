@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function RegistrationForm() {
+function RegistrationForm({ onRegistrationSuccess }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [accessToken, setAccessToken] = useState('');
@@ -27,6 +27,8 @@ function RegistrationForm() {
             setAccessToken(accessToken);
             setRefreshToken(refreshToken);
             // Дополнительные действия с полученными токенами
+            // Вызываем функцию onRegistrationSuccess сразу после получения токенов
+            onRegistrationSuccess();
         } catch (error) {
             console.error('Failed to get tokens:', error);
             // Дополнительные действия при неудаче

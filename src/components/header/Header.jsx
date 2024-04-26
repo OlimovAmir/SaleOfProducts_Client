@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../../styles/App.css';
 import logo from '../../images/logo.jpg';
-import { Route, Routes, BrowserRouter, Link, Navigate } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Link} from 'react-router-dom';
 import Home from './../../pages/Home';
 import About from './../../pages/About';
 import Contact from './../../pages/Contact';
@@ -15,7 +15,7 @@ import DocumentsEmployee from './../../pages/DocumentsEmployee';
 import DocumentsProduct from '../../pages/DocumentsProduct';
 import { useSelector } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
-import RegistrationForm from '../../form/RegistrationForm.jsx';
+
 
 function Header() {
     const language = useSelector(state => state.language.value);
@@ -85,10 +85,9 @@ function Header() {
                     </Container>
                 </Navbar>
 
-                <Routes default>
-                    <Route path="/" element={<Navigate to="/register" />} />
-                    <Route exact path="/register" element={<RegistrationForm />} />
-                    <Route path="/home" element={<Home />} />
+                <Routes default>                   
+                    
+                    <Route exact path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/documents" element={<Documents />} />
                     <Route path="/documentEmployee" element={<DocumentsEmployee />} />
@@ -97,8 +96,6 @@ function Header() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>
-
-
 
             </div>
         </BrowserRouter>
