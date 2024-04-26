@@ -12,12 +12,8 @@ function App() {
   };
   return (
     <div className="App video-background">
-      <video autoPlay loop muted>
-        <source src="your-video.mp4" type="video/mp4" />
-        {/* Добавьте дополнительные форматы, если нужно */}
-        Your browser does not support the video tag.
-      </video>
-      <header className="">
+      
+      <header className="content">
         {isRegistered ? <Header /> : <RegistrationForm onRegistrationSuccess={handleRegistrationSuccess} />}
       </header>
     </div>
