@@ -1,16 +1,14 @@
 body .videoBackground {
-  position: relative; /* Изменено с fixed на relative */
-  width: 100%; /* Добавлено */
-  height: 500px; /* Добавлено */
+  position: fixed;; 
+  width: 100%; 
+  height: 100%; 
 }
 
 body .videoBackground video {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: absolute;  
   width: 100%;
-  height: 500px;
-  object-fit: cover; /* Чтобы видео заполняло всю видимую область */
+  height: 100%;
+  object-fit: cover; 
   z-index: -1;
 }
 
