@@ -4,6 +4,9 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from 'react-bootstrap';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import styles from './RegistrationForm.module.css';
 import videoSource from '../video/istockphoto.mp4';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -48,7 +51,33 @@ function RegistrationForm({ onRegistrationSuccess }) {
                 <source src={videoSource} type="video/mp4" />
             </video>
             <div >
+            <Navbar variant="dark" bg="dark" expand="lg">
+                        <Container fluid>
+                            <Navbar.Brand href="#home">The program for warehouse accounting</Navbar.Brand>
+                            <Navbar.Toggle aria-controls="navbar-dark-example" />
+                            <Navbar.Collapse id="navbar-dark-example">
+                                <Nav>
+                                    <NavDropdown
+                                        id="nav-dropdown-dark-example"
+                                        title="Settings"
+                                        menuVariant="dark"
+                                    >
+                                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.2">
+                                            Another action
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="#action/3.4">
+                                            Separated link
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar>
                 <div className={styles.content}>
+                    
                     <Container className={styles.container}>
                         <Row>
                             <Col xs={6} md={12}>
@@ -63,7 +92,7 @@ function RegistrationForm({ onRegistrationSuccess }) {
                                         <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
                                     </Form.Group>
 
-                                    <Button  variant="primary" type="submit">Log in</Button>
+                                    <Button variant="primary" type="submit">Log in</Button>
                                 </Form>
                             </Col>
                         </Row>

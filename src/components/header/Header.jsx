@@ -52,6 +52,7 @@ function Header() {
                                     <NavDropdown.Item href="/documentCash" >{language === 'en' ? 'Cash' : 'Касса'}</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">{language === 'en' ? 'Setting' : 'Настройка'}</NavDropdown.Item>
+                                    
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
