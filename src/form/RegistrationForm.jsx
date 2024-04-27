@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from 'react-bootstrap';
 import styles from './RegistrationForm.module.css';
-import videoSource from '../video/istockphoto.mp4'; // Импортируйте видеофайл
+import videoSource from '../video/istockphoto.mp4';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function RegistrationForm({ onRegistrationSuccess }) {
@@ -47,26 +48,22 @@ function RegistrationForm({ onRegistrationSuccess }) {
                 <source src={videoSource} type="video/mp4" />
             </video>
             <div >
-                <div className='content'>
-                    <Container className='mt-5'>
+                <div className={styles.content}>
+                    <Container className={styles.container}>
                         <Row>
-                            <Col xs={6} md={4}>
+                            <Col xs={6} md={12}>
                                 <Form onSubmit={handleSubmit}>
-                                    <Form.Group as={Row} className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label column sm="2">Username:</Form.Label>
-                                        <Col sm="10">
-                                            <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-                                        </Col>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label className={styles.title} >Username:</Form.Label>
+                                        <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your Username" />
                                     </Form.Group>
 
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                        <Form.Label column sm="2"> Password: </Form.Label>
-                                        <Col sm="10">
-                                            <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-                                        </Col>
+                                    <Form.Group className="mb-3" controlId="formPlaintextPassword">
+                                        <Form.Label className={styles.title} > Password: </Form.Label>
+                                        <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
                                     </Form.Group>
 
-                                    <Button type="submit">Log in</Button>
+                                    <Button  variant="primary" type="submit">Log in</Button>
                                 </Form>
                             </Col>
                         </Row>
