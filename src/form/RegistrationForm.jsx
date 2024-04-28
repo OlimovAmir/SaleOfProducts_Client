@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -18,6 +18,17 @@ function RegistrationForm({ onRegistrationSuccess }) {
     const [accessToken, setAccessToken] = useState('');
     const [refreshToken, setRefreshToken] = useState('');
 
+    useEffect(() => {
+        // Проверяем наличие токенов в localStorage при загрузке компонента
+        const storedAccessToken = localStorage.getItem('accessToken');
+        const storedRefreshToken = localStorage.getItem('refreshToken');
+        if (storedAccessToken && storedRefreshToken) {
+            setAccessToken(storedAccessToken);
+            setRefreshToken(storedRefreshToken);
+            // Вызываем функцию onRegistrationSuccess сразу после установки токенов
+            onRegistrationSuccess();
+        }
+    }, []); // Пустой массив зависимостей гарантирует выполнение эффекта только при монтировании компонента
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,6 +42,10 @@ function RegistrationForm({ onRegistrationSuccess }) {
             });
 
             const { accessToken, refreshToken } = response.data;
+
+            // Сохраняем токены в localStorage
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
 
             console.log('Access Token:', accessToken);
             console.log('Refresh Token:', refreshToken);
@@ -112,4 +127,4 @@ function RegistrationForm({ onRegistrationSuccess }) {
     )
 }
 
-export default RegistrationForm
+export default RegistrationForm;
