@@ -2,6 +2,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleLanguage } from '../redux/languageSlice.js';
+import Form from 'react-bootstrap/Form';
+
 
 const LanguageSelector = () => {
   const dispatch = useDispatch();
@@ -11,10 +13,13 @@ const LanguageSelector = () => {
   };
 
   return (
-    <select onChange={handleChange}>
-      <option value="en">En</option>
-      <option value="ru">Ru</option>
-    </select>
+    <div>
+      <Form.Select onChange={handleChange} aria-label="Default select example">
+        <option value="en">En</option>
+        <option value="ru">Ru</option>
+      </Form.Select>     
+    </div>
+
   );
 };
 
