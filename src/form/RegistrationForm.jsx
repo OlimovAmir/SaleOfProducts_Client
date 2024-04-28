@@ -11,7 +11,6 @@ import styles from './RegistrationForm.module.css';
 import videoSource from '../video/istockphoto.mp4';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function RegistrationForm({ onRegistrationSuccess }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -19,20 +18,40 @@ function RegistrationForm({ onRegistrationSuccess }) {
     const [refreshToken, setRefreshToken] = useState('');
 
     useEffect(() => {
-        // Проверяем наличие токенов в localStorage при загрузке компонента
         const storedAccessToken = localStorage.getItem('accessToken');
         const storedRefreshToken = localStorage.getItem('refreshToken');
         if (storedAccessToken && storedRefreshToken) {
             setAccessToken(storedAccessToken);
             setRefreshToken(storedRefreshToken);
-            // Вызываем функцию onRegistrationSuccess сразу после установки токенов
             onRegistrationSuccess();
         }
-    }, []); // Пустой массив зависимостей гарантирует выполнение эффекта только при монтировании компонента
+    }, []);
+
+    const handleTokenRefresh = async () => {
+        try {
+            const response = await axios.post('https://localhost:7267/Auth/RefreshToken', null, {
+                params: {
+                    refreshToken: refreshToken,
+                },
+            });
+            const newAccessToken = response.data.accessToken;
+            setAccessToken(newAccessToken);
+            localStorage.setItem('accessToken', newAccessToken);
+        } catch (error) {
+            console.error('Failed to refresh access token:', error);
+            // Дополнительные действия при неудаче обновления токена
+        }
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleTokenRefresh();
+        }, 15 * 60 * 1000); // Обновляем токен каждые 15 минут
+        return () => clearInterval(interval);
+    }, [refreshToken]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         try {
             const response = await axios.post('https://localhost:7267/Auth/Token', null, {
                 params: {
@@ -40,26 +59,18 @@ function RegistrationForm({ onRegistrationSuccess }) {
                     password: password,
                 },
             });
-
             const { accessToken, refreshToken } = response.data;
-
-            // Сохраняем токены в localStorage
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
-
-            console.log('Access Token:', accessToken);
-            console.log('Refresh Token:', refreshToken);
-
             setAccessToken(accessToken);
             setRefreshToken(refreshToken);
-            // Дополнительные действия с полученными токенами
-            // Вызываем функцию onRegistrationSuccess сразу после получения токенов
             onRegistrationSuccess();
         } catch (error) {
             console.error('Failed to get tokens:', error);
             // Дополнительные действия при неудаче
         }
     };
+
     return (
         <div className={styles.videoBackground}>
             <video autoPlay loop muted>
