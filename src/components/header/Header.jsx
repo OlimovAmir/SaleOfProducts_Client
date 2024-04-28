@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../../styles/App.css';
 import logo from '../../images/logo.jpg';
-import { Route, Routes, BrowserRouter, Link} from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
 import Home from './../../pages/Home';
 import About from './../../pages/About';
 import Contact from './../../pages/Contact';
@@ -15,6 +15,9 @@ import DocumentsEmployee from './../../pages/DocumentsEmployee';
 import DocumentsProduct from '../../pages/DocumentsProduct';
 import { useSelector } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
+
+import { useDispatch } from 'react-redux'; // Подключаем хук useDispatch для работы с Redux
+import { logout } from './actions'; // Подключаем action creator для выхода из системы
 
 
 function Header() {
@@ -52,9 +55,9 @@ function Header() {
                                     <NavDropdown.Item href="/documentCash" >{language === 'en' ? 'Cash' : 'Касса'}</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">{language === 'en' ? 'Setting' : 'Настройка'}</NavDropdown.Item>
-                                    
+
                                 </NavDropdown>
-                                
+
                             </Nav>
                         </Navbar.Collapse>
                         <Form inline="true">
@@ -82,13 +85,16 @@ function Header() {
                                 <Col xs="auto">
                                     <LanguageSelector />
                                 </Col>
+                                <Col xs="auto">
+                                    <Button variant="danger">Log out</Button>
+                                </Col>
                             </Row>
                         </Form>
                     </Container>
                 </Navbar>
 
-                <Routes default>                   
-                    
+                <Routes default>
+
                     <Route exact path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/documents" element={<Documents />} />
