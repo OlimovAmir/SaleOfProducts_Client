@@ -23,7 +23,9 @@ function Header() {
     const language = useSelector(state => state.language.value);
     const dispatch = useDispatch(); // Получаем dispatch из хука useDispatch
 
-    
+    const handleLogout = () => {
+        dispatch(logout()); // Вызываем action creator logout при нажатии на кнопку "Log out"
+    };
     return (
         <BrowserRouter>
             <div>
