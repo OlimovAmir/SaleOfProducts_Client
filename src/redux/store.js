@@ -10,7 +10,7 @@ export const store = configureStore({
     modal: modalReducer,
     language: languageReducer,
     success: successReducer,
-    nameCharacteristik: nameCharacteristikReduce
+    nameCharacteristik: nameCharacteristikReduce,
 
   }
 });

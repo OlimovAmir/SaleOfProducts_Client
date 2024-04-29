@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
 
 import { useDispatch } from 'react-redux'; // Подключаем хук useDispatch для работы с Redux
-import { logout } from './actions'; // Подключаем action creator для выхода из системы
+//import { logout } from './actions'; // Подключаем action creator для выхода из системы
 
 
 function Header() {
