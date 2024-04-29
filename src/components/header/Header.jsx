@@ -13,15 +13,17 @@ import Documents from '../../pages/Documents';
 import DocumentsUnits from '../../pages/DocumentsUnits';
 import DocumentsEmployee from './../../pages/DocumentsEmployee';
 import DocumentsProduct from '../../pages/DocumentsProduct';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
 
-import { useDispatch } from 'react-redux'; // Подключаем хук useDispatch для работы с Redux
-//import { logout } from './actions'; // Подключаем action creator для выхода из системы
+import { logout } from '../../redux/reducers/authSlice.js'; // Подключаем action creator для выхода из системы
 
 
 function Header() {
     const language = useSelector(state => state.language.value);
+    const dispatch = useDispatch(); // Получаем dispatch из хука useDispatch
+
+    
     return (
         <BrowserRouter>
             <div>
