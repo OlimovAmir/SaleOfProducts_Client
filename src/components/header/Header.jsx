@@ -90,7 +90,7 @@ function Header() {
                                     <LanguageSelector />
                                 </Col>
                                 <Col xs="auto">
-                                    <Button variant="danger">Log out</Button>
+                                    <Button variant="danger" onClick={handleLogout}>Log out</Button>
                                 </Col>
                             </Row>
                         </Form>
