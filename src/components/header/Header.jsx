@@ -24,7 +24,13 @@ function Header() {
     const dispatch = useDispatch(); // Получаем dispatch из хука useDispatch
 
     const handleLogout = () => {
-        dispatch(logout()); // Вызываем action creator logout при нажатии на кнопку "Log out"
+       // Очищаем токены из localStorage при выходе из системы
+       localStorage.removeItem('accessToken');
+       localStorage.removeItem('refreshToken');
+       // Диспетчеризуем action creator logout для выхода из системы
+       dispatch(logout());
+        // Обновляем страницу
+       window.location.reload();
     };
     return (
         <BrowserRouter>
@@ -98,7 +104,6 @@ function Header() {
                 </Navbar>
 
                 <Routes default>
-
                     <Route exact path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/documents" element={<Documents />} />
