@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../../styles/App.css';
 import logo from '../../images/logo.jpg';
-import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Link, NavLink } from 'react-router-dom';
 import Home from './../../pages/Home';
 import About from './../../pages/About';
 import Contact from './../../pages/Contact';
@@ -58,7 +58,7 @@ function Header() {
                                 <Nav.Link href="#link" >{language === 'en' ? 'Statistics' : 'Статистика'}</Nav.Link>
                                 <NavDropdown title={<span >{language === 'en' ? 'Documents' : 'Документы'}</span>} id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/documentEmployee" >{language === 'en' ? 'Employee' : 'Сотрудники'}</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentProduct" >{language === 'en' ? 'Product' : 'Товар'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/documentProduct">{language === 'en' ? 'Product' : 'Товар'}</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentsUnits">{language === 'en' ? 'Unit' : 'Ед. изм.'}</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentSupplier" >{language === 'en' ? 'Supplier' : 'Поставщик'}</NavDropdown.Item>
                                     <NavDropdown.Item href="/documentCustomer" >{language === 'en' ? 'Customer' : 'Покупатель'}</NavDropdown.Item>
