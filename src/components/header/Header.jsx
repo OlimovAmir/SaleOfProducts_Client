@@ -24,13 +24,13 @@ function Header() {
     const dispatch = useDispatch(); // Получаем dispatch из хука useDispatch
 
     const handleLogout = () => {
-       // Очищаем токены из localStorage при выходе из системы
-       localStorage.removeItem('accessToken');
-       localStorage.removeItem('refreshToken');
-       // Диспетчеризуем action creator logout для выхода из системы
-       dispatch(logout());
+        // Очищаем токены из localStorage при выходе из системы
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        // Диспетчеризуем action creator logout для выхода из системы
+        dispatch(logout());
         // Обновляем страницу
-       window.location.reload();
+        window.location.reload();
     };
     return (
         <BrowserRouter>
@@ -57,12 +57,12 @@ function Header() {
                                 <Link to="/blog" className="nav-link">{language === 'en' ? 'Reports' : 'Отчеты'}</Link>
                                 <Nav.Link href="#link" >{language === 'en' ? 'Statistics' : 'Статистика'}</Nav.Link>
                                 <NavDropdown title={<span >{language === 'en' ? 'Documents' : 'Документы'}</span>} id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/documentEmployee" >{language === 'en' ? 'Employee' : 'Сотрудники'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/documentEmployee">{language === 'en' ? 'Employee' : 'Сотрудники'}</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/documentProduct">{language === 'en' ? 'Product' : 'Товар'}</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentsUnits">{language === 'en' ? 'Unit' : 'Ед. изм.'}</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentSupplier" >{language === 'en' ? 'Supplier' : 'Поставщик'}</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentCustomer" >{language === 'en' ? 'Customer' : 'Покупатель'}</NavDropdown.Item>
-                                    <NavDropdown.Item href="/documentCash" >{language === 'en' ? 'Cash' : 'Касса'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/documentsUnits">{language === 'en' ? 'Unit' : 'Ед. изм.'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/documentSupplier">{language === 'en' ? 'Supplier' : 'Поставщик'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/documentCustomer">{language === 'en' ? 'Customer' : 'Покупатель'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/documentCash">{language === 'en' ? 'Cash' : 'Касса'}</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">{language === 'en' ? 'Setting' : 'Настройка'}</NavDropdown.Item>
 
