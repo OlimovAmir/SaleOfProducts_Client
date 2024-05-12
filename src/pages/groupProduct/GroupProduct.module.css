@@ -41,8 +41,8 @@
 
   .wrapper{
     border-left: 4px solid blue;
-    padding: 15px;
-    box-shadow: inset 0 0 45px 15px blue;
+    padding: 10px;
+    box-shadow:  -15px 0 10px -10px rgba(0, 0, 255, 0.5); /* Тень синего цвета, находящаяся только слева */
   }
 
   .titleGroup {
