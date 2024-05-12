@@ -87,7 +87,7 @@ function GroupProduct({ onSubmit }) {
     );
     filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
     return (
-        <div>
+        <div className={styles.wrapper}>
             <div className=''>
                 <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
                 <AddGroupModal

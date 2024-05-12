@@ -14,3 +14,9 @@
   .groupActions {
     margin-left: 10px; /* Регулируйте расстояние между иконками */
   }
+
+  .wrapper{
+    border-left: 4px solid blue;
+    padding: 15px;
+    box-shadow: inset 0 0 45px 15px blue;
+  }

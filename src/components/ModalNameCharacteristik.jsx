@@ -83,7 +83,7 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
           >
             <option value="">Select Characteristics</option>
             {characteristics && characteristics.map(characteristic => (
-              <option key={characteristic.id} value={characteristic.id}>{characteristic.name}</option>
+              <option key={characteristic.id} value={characteristic.id}>{characteristic.name} <Button>X</Button> </option>
             ))}
           </Form.Control>
         </Form.Group>
