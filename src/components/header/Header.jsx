@@ -53,7 +53,7 @@ function Header() {
                                 <Link to="/home" className="nav-link">{language === 'en' ? 'Home' : 'Главное'}</Link>
                                 <Link to="/about" className="nav-link">{language === 'en' ? 'About us' : 'О нас'}</Link>
                                 <Link to="/documents" className="nav-link">{language === 'en' ? 'Journal' : 'Журналы'}</Link>
-                                <Link to="/contact" className="nav-link">{language === 'en' ? 'Contact' : 'Контакты'}</Link>
+                                
                                 <Link to="/blog" className="nav-link">{language === 'en' ? 'Reports' : 'Отчеты'}</Link>
                                 <Nav.Link href="#link" >{language === 'en' ? 'Statistics' : 'Статистика'}</Nav.Link>
                                 <NavDropdown title={<span >{language === 'en' ? 'Documents' : 'Документы'}</span>} id="basic-nav-dropdown">
