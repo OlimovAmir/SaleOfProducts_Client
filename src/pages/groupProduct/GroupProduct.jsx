@@ -88,26 +88,24 @@ function GroupProduct({ onSubmit }) {
     filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
     return (
         <div className={styles.wrapper}>
-            <div className=''>
+            <div className='d-flex align-items-center'>
                 <Button className='m-2' variant="secondary" onClick={handleShowAddModal}>Add Group</Button>
+                <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    className="mr-sm-2 w-50"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
                 <AddGroupModal
                     showAddModal={showAddModal}
                     handleClose={() => setShowAddModal(false)}
                     updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
                 />
             </div>
-            <Form.Control
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-                value={searchTerm}
-                onChange={handleSearchChange}
-            />
             <div>
-            
                 <Container>
-                    <h2>Группа продуктов</h2>
-                    
+                    <h2 className={styles.titleGroup} >Группа продуктов</h2>
                     <ul>
                         {filteredGroups.map((group, index) => (
                             <li key={index} className={styles.groupListItem}>
