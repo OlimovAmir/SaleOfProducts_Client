@@ -85,7 +85,7 @@ function GroupProduct({ onSubmit }) {
     const filteredGroups = groups.filter(group =>
         group.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
+    filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
     return (
         <div>
             <div className=''>
@@ -104,8 +104,10 @@ function GroupProduct({ onSubmit }) {
                 onChange={handleSearchChange}
             />
             <div>
+            
                 <Container>
                     <h2>Группа продуктов</h2>
+                    
                     <ul>
                         {filteredGroups.map((group, index) => (
                             <li key={index} className={styles.groupListItem}>
