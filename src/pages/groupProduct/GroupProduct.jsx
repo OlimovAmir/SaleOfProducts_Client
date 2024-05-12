@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
@@ -65,7 +65,7 @@ function GroupProduct({ onSubmit }) {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
 
-    const handleNameCha = (groupId, groupName ) => {
+    const handleNameCha = (groupId, groupName) => {
         console.log('groupId:', groupId);
         setSelectedGroupId(groupId);
         setSelectedGroupName(groupName);
@@ -76,6 +76,15 @@ function GroupProduct({ onSubmit }) {
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const [selectedGroupName, setSelectedGroupName] = useState(null);
 
+    // код для поиска объекта
+    const [searchTerm, setSearchTerm] = useState('');
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const filteredGroups = groups.filter(group =>
+        group.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div>
@@ -87,43 +96,45 @@ function GroupProduct({ onSubmit }) {
                     updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
                 />
             </div>
+            <Form.Control
+                type="text"
+                placeholder="Search"
+                className="mr-sm-2"
+                value={searchTerm}
+                onChange={handleSearchChange}
+            />
             <div>
                 <Container>
                     <h2>Группа продуктов</h2>
                     <ul>
-                        {groups.length > 0 && groups.map((group, index) => {
-                            if (group && group.name) {
-                                return (
-                                    <li key={index} className={styles.groupListItem}>
-                                        <div className={styles.groupName}>{group.name}</div>
-                                        <div className={styles.groupActions}>
-                                            <Button
-                                                className='m-2'
-                                                size="sm"
-                                                variant="outline-danger"
-                                                onClick={() => handleDelete(group.id)}
-                                            >
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </Button>
-                                            <Button className='m-2' size="sm" variant="outline-info"><FontAwesomeIcon icon={faPen} /></Button>
-                                            <Button
-                                                className='m-2'
-                                                size="sm"
-                                                variant="secondary"
-                                                onClick={() => {                                                    
-                                                    handleNameCha(group.id, group.name );
-                                                }} // Передаем groupId
-                                            >
-                                                <FontAwesomeIcon icon={faList} /> Add Name Characteristik
-                                            </Button>
-                                        </div>
-                                    </li>
-                                );
-                            } else {
-                                console.warn('Invalid group object:', group);
-                                return null; // Пропускаем элемент списка, если он не содержит свойство 'name'
-                            }
-                        })}
+                        {filteredGroups.map((group, index) => (
+                            <li key={index} className={styles.groupListItem}>
+                                <div className={styles.groupName}>{group.name}</div>
+                                <div className={styles.groupActions}>
+                                    <Button
+                                        className='m-2'
+                                        size="sm"
+                                        variant="outline-danger"
+                                        onClick={() => handleDelete(group.id)}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                    <Button className='m-2' size="sm" variant="outline-info">
+                                        <FontAwesomeIcon icon={faPen} />
+                                    </Button>
+                                    <Button
+                                        className='m-2'
+                                        size="sm"
+                                        variant="secondary"
+                                        onClick={() => {
+                                            handleNameCha(group.id, group.name);
+                                        }}
+                                    >
+                                        <FontAwesomeIcon icon={faList} /> Add Name Characteristik
+                                    </Button>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                     <SuccessModal show={selectedGroup !== null} handleClose={handleCloseModal} />
                     <ModalNameCharacteristik
