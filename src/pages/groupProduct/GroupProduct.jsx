@@ -26,6 +26,7 @@ function GroupProduct({ onSubmit }) {
             .then(response => {
                 // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Не удалось загрузить список GroupProduct:', error);
@@ -64,13 +65,17 @@ function GroupProduct({ onSubmit }) {
         setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
     };
 
-    const handleNameCha = (groupId) => {
+    const handleNameCha = (groupId, groupName ) => {
+        console.log('groupId:', groupId);
         setSelectedGroupId(groupId);
+        setSelectedGroupName(groupName);
         setShowModalName(true); // Вызываем действие для показа модального окна
+
     };
 
     const [selectedGroupId, setSelectedGroupId] = useState(null);
-    
+    const [selectedGroupName, setSelectedGroupName] = useState(null);
+
 
     return (
         <div>
@@ -86,10 +91,10 @@ function GroupProduct({ onSubmit }) {
                 <Container>
                     <h2>Группа продуктов</h2>
                     <ul>
-                        {groups.length > 0 && groups.map(group => {
+                        {groups.length > 0 && groups.map((group, index) => {
                             if (group && group.name) {
                                 return (
-                                    <li key={group.id} className={styles.groupListItem}>
+                                    <li key={index} className={styles.groupListItem}>
                                         <div className={styles.groupName}>{group.name}</div>
                                         <div className={styles.groupActions}>
                                             <Button
@@ -105,7 +110,9 @@ function GroupProduct({ onSubmit }) {
                                                 className='m-2'
                                                 size="sm"
                                                 variant="secondary"
-                                                onClick={() => handleNameCha(group.id)} // Передаем groupId
+                                                onClick={() => {                                                    
+                                                    handleNameCha(group.id, group.name );
+                                                }} // Передаем groupId
                                             >
                                                 <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                             </Button>
@@ -123,6 +130,7 @@ function GroupProduct({ onSubmit }) {
                         show={showModalName}
                         handleClose={() => setShowModalName(false)}
                         groupId={selectedGroupId} // Передаем groupId в компонент ModalNameCharacteristik
+                        groupName={selectedGroupName}
                     />
                 </Container>
             </div>
