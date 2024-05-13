@@ -1,12 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Select from 'react-select';
 
 function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
   const [charactergroupName, setGroupName] = useState('');
+  const [selectedCharacteristic, setSelectedCharacteristic] = useState('');
 
   const handleUpdateGroup = async () => {
     try {
@@ -25,22 +25,16 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
       handleClose();
     } catch (error) {
       console.error('Error sending data:', error);
-
       alert('An error occurred while sending data to the server');
       handleClose();
     }
   };
 
-  // раздел поиск и ввод данных из базы 
-  // Состояние для хранения списка 
   const [characteristics, setCharacteristics] = useState([]);
 
-  // Загрузка списка должностей при монтировании компонента
   useEffect(() => {
-    // Запрос к API для получения списка 
     axios.get('http://localhost:5134/NameCharacteristicProduct/AllItems')
       .then(response => {
-        // Установка списка в состояние
         setCharacteristics(response.data);
       })
       .catch(error => {
@@ -48,15 +42,8 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
       });
   }, []);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    positionId: '', // Идентификатор должности
-  });
-
-  // Обработчик события для обновления данных формы при изменении ввода
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleSelectChange = (selectedOption) => {
+    setSelectedCharacteristic(selectedOption);
   };
 
   return (
@@ -73,24 +60,16 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
             value={charactergroupName}
             onChange={(e) => setGroupName(e.target.value)}
           />
-
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPositionId">
           <Form.Label className='text-left'>Characteristics</Form.Label>
-
-          <Form.Control
-            as="select"
-            name="positionId"
-            value={formData.positionId}
-            onChange={handleInputChange}
-          >
-            <option value="">Select Characteristics</option>
-            {characteristics && characteristics.map(characteristic => (
-              <option key={characteristic.id} value={characteristic.id}>
-                {characteristic.name}
-              </option>
-            ))}
-          </Form.Control>
+          <Select
+            options={characteristics}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
+            onChange={(selectedOption) => handleSelectChange(selectedOption)}
+            isSearchable
+          />
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
