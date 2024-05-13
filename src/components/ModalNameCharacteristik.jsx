@@ -1,6 +1,9 @@
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
   const [charactergroupName, setGroupName] = useState('');
@@ -74,7 +77,7 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPositionId">
           <Form.Label className='text-left'>Characteristics</Form.Label>
-          
+
           <Form.Control
             as="select"
             name="positionId"
@@ -83,7 +86,9 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
           >
             <option value="">Select Characteristics</option>
             {characteristics && characteristics.map(characteristic => (
-              <option key={characteristic.id} value={characteristic.id}>{characteristic.name} <Button>X</Button> </option>
+              <option key={characteristic.id} value={characteristic.id}>
+                {characteristic.name}
+              </option>
             ))}
           </Form.Control>
         </Form.Group>
