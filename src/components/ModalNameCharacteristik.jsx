@@ -5,16 +5,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
 
 function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
-  const [charactergroupName, setGroupName] = useState('');
-  const [selectedCharacteristic, setSelectedCharacteristic] = useState('');
+  const [selectedCharacteristic, setSelectedCharacteristic] = useState(null);
 
   const handleUpdateGroup = async () => {
+    if (!selectedCharacteristic) {
+      alert('Please select a characteristic.');
+      return;
+    }
     try {
       const data = {
         name: groupName,
         nameCharacteristicProducts: [
           {
-            name: charactergroupName,
+            name: selectedCharacteristic.name,
           }
         ]
       };
@@ -52,22 +55,13 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
         <Modal.Title>Update Name Characteristic Product</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Group controlId="formName">
-          <Form.Label>Update Name Characteristic Product</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter name"
-            value={charactergroupName}
-            onChange={(e) => setGroupName(e.target.value)}
-          />
-        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPositionId">
           <Form.Label className='text-left'>Characteristics</Form.Label>
           <Select
             options={characteristics}
             getOptionLabel={(option) => option.name}
             getOptionValue={(option) => option.id}
-            onChange={(selectedOption) => handleSelectChange(selectedOption)}
+            onChange={handleSelectChange}
             isSearchable
           />
         </Form.Group>
