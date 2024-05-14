@@ -3,6 +3,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
+import { faList } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
   const [selectedCharacteristic, setSelectedCharacteristic] = useState(null);
@@ -52,8 +54,15 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Update Name Characteristic Product</Modal.Title>
+        <Modal.Title>Add Name Characteristic Product</Modal.Title>
       </Modal.Header>
+      <Button
+        className='m-2'
+        size="sm"
+        variant="secondary"      
+      >
+        <FontAwesomeIcon icon={faList} /> Add New Name Characteristik
+      </Button>
       <Modal.Body>
         <Form.Group className="mb-3" controlId="formBasicPositionId">
           <Form.Label className='text-left'>Characteristics</Form.Label>
