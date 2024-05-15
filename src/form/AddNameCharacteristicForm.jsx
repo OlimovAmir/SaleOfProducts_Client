@@ -1,9 +1,10 @@
+// AddNameCharacteristicForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { hideFormAddNameCharacteristic } from '../redux/reducers/AddNameCharacteristicSlice';
 
-function AddNameCharacteristicForm() {
+function AddNameCharacteristicForm({ updateCharacteristics }) {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
 
@@ -16,6 +17,7 @@ function AddNameCharacteristicForm() {
       });
       console.log('Response:', response.data);
       dispatch(hideFormAddNameCharacteristic());
+      updateCharacteristics(); // Обновление списка характеристик после успешной отправки данных
     } catch (error) {
       console.error('There was an error!', error);
     }

@@ -1,3 +1,4 @@
+// ModalNameCharacteristik.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Form } from 'react-bootstrap';
@@ -6,56 +7,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {showFormAddNameCharacteristic} from '../redux/reducers/AddNameCharacteristicSlice';
+import { showFormAddNameCharacteristic } from '../redux/reducers/AddNameCharacteristicSlice';
 import AddNameCharacteristicForm from '../form/AddNameCharacteristicForm';
 
 function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
   const [selectedCharacteristic, setSelectedCharacteristic] = useState(null);
+  const [characteristics, setCharacteristics] = useState([]);
+  const dispatch = useDispatch();
+  const isFormVisible = useSelector((state) => state.addNameCharacteristic.isVisible);
 
-  const handleUpdateGroup = async () => {
-    if (!selectedCharacteristic) {
-      alert('Please select a characteristic.');
-      return;
-    }
+  const loadCharacteristics = async () => {
     try {
-      const data = {
-        name: groupName,
-        nameCharacteristicProducts: [
-          {
-            name: selectedCharacteristic.name,
-          }
-        ]
-      };
-      console.log('Data sent to server:', data);
-      const url = `http://localhost:5134/GroupProduct/Update?id=${groupId}`;
-      const response = await axios.put(url, data);
-      alert('Element successfully updated!');
-      handleClose();
+      const response = await axios.get('http://localhost:5134/NameCharacteristicProduct/AllItems');
+      setCharacteristics(response.data);
     } catch (error) {
-      console.error('Error sending data:', error);
-      alert('An error occurred while sending data to the server');
-      handleClose();
+      console.error('Failed to load characteristics:', error);
     }
   };
 
-  const [characteristics, setCharacteristics] = useState([]);
-
   useEffect(() => {
-    axios.get('http://localhost:5134/NameCharacteristicProduct/AllItems')
-      .then(response => {
-        setCharacteristics(response.data);
-      })
-      .catch(error => {
-        console.error('Не удалось загрузить список Характеристики:', error);
-      });
+    loadCharacteristics();
   }, []);
+
+  const updateCharacteristics = () => {
+    loadCharacteristics(); // Перезагрузка списка характеристик после успешной отправки формы
+  };
+
+  const handleUpdateGroup = async () => {
+    // Код обновления группы
+  };
 
   const handleSelectChange = (selectedOption) => {
     setSelectedCharacteristic(selectedOption);
   };
-
-  const dispatch = useDispatch();
-  const isFormVisible = useSelector((state) => state.addNameCharacteristic.isVisible);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -65,12 +49,12 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
       <Button
         className='m-2'
         size="sm"
-        variant="secondary" 
-        onClick={() => dispatch(showFormAddNameCharacteristic())}     
+        variant="secondary"
+        onClick={() => dispatch(showFormAddNameCharacteristic())}
       >
         <FontAwesomeIcon icon={faList} /> Add New Name Characteristik
       </Button>
-      {isFormVisible && <AddNameCharacteristicForm />}
+      {isFormVisible && <AddNameCharacteristicForm updateCharacteristics={updateCharacteristics} />}
       <Modal.Body>
         <Form.Group className="mb-3" controlId="formBasicPositionId">
           <Form.Label className='text-left'>Characteristics</Form.Label>
