@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {showFormAddNameCharacteristic} from '../redux/reducers/AddNameCharacteristicSlice';
+import AddNameCharacteristicForm from '../form/AddNameCharacteristicForm';
 
 function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
   const [selectedCharacteristic, setSelectedCharacteristic] = useState(null);
@@ -51,6 +54,9 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
     setSelectedCharacteristic(selectedOption);
   };
 
+  const dispatch = useDispatch();
+  const isFormVisible = useSelector((state) => state.addNameCharacteristic.isVisible);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -59,10 +65,12 @@ function ModalNameCharacteristik({ show, handleClose, groupId, groupName }) {
       <Button
         className='m-2'
         size="sm"
-        variant="secondary"      
+        variant="secondary" 
+        onClick={() => dispatch(showFormAddNameCharacteristic())}     
       >
         <FontAwesomeIcon icon={faList} /> Add New Name Characteristik
       </Button>
+      {isFormVisible && <AddNameCharacteristicForm />}
       <Modal.Body>
         <Form.Group className="mb-3" controlId="formBasicPositionId">
           <Form.Label className='text-left'>Characteristics</Form.Label>

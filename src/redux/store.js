@@ -3,6 +3,7 @@ import languageReducer from './languageSlice.js';
 import modalReducer from './reducers/modalAddGroupSlice.js';
 import successReducer from '../redux/reducers/successSlice.js';
 import nameCharacteristikReduce from './reducers/NameCharacteristikSlice.js';
+import addNameCharacteristicReducer from './reducers/AddNameCharacteristicSlice.js';
 
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     language: languageReducer,
     success: successReducer,
     nameCharacteristik: nameCharacteristikReduce,
+    addNameCharacteristic: addNameCharacteristicReducer,
 
   }
 });
