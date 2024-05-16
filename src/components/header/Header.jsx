@@ -12,6 +12,7 @@ import Blog from './../../pages/Blog';
 import Documents from '../../pages/Documents';
 import DocumentsUnits from '../../pages/DocumentsUnits';
 import DocumentsEmployee from './../../pages/DocumentsEmployee';
+import DocumentsSupplier from './../../pages/DocumentsSupplier.jsx';
 import DocumentsProduct from '../../pages/DocumentsProduct';
 import { useSelector, useDispatch } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
@@ -110,6 +111,7 @@ function Header() {
                     <Route path="/documentEmployee" element={<DocumentsEmployee />} />
                     <Route path="/documentsUnits" element={<DocumentsUnits />} />
                     <Route path="/documentProduct" element={<DocumentsProduct />} />
+                    <Route path="/documentSupplier" element={<DocumentsSupplier />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>
