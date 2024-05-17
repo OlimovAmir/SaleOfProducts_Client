@@ -1,9 +1,8 @@
-import React from 'react'
-import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap'
-import FormUnit from '../form/FormUnit.jsx';
+import React from 'react';
+import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import GroupProduct from './groupProduct/GroupProduct.jsx';
-import GetAllProduct from './product/GetAllProduct.jsx';
+import GetAllSupplier from './supplier/GetAllSupplier';
+
 
 
 function DocumentsProduct() {
@@ -20,7 +19,7 @@ function DocumentsProduct() {
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='GetAll' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='getAll' className="nav-link" style={{ textAlign: 'left' }}>
                                     {language === 'en' ? 'Get All Supplier' : 'Список всех поставщиков'}
                                 </Nav.Link>
                             </NavItem>
@@ -37,7 +36,7 @@ function DocumentsProduct() {
 
                             </TabPane>
                             <TabPane eventKey='getAll'>
-                                <FormUnit />
+                                <GetAllSupplier/>
                             </TabPane>
                             <TabPane eventKey='setting'>
                             </TabPane>
