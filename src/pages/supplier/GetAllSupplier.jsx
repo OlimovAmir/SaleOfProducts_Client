@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faList } from '@fortawesome/free-solid-svg-icons';
+import styles from './Supplier.module.css';
 import axios from 'axios';
 
 function GetAllSupplier() {
@@ -23,7 +26,20 @@ function GetAllSupplier() {
     }, []);
     return (
         <Container>
-            <h2>Список поставщиков</h2>
+        <div className={styles.title}>
+        <h2>Список поставщиков</h2>
+            <Button
+                className='m-2'
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+
+                }}
+            >
+                <FontAwesomeIcon icon={faList} /> Add New Supplier
+            </Button>
+        </div>
+            
             <ol>
                 <div className='row'>
                     <div className='col-3'> <b>Наименование:</b>   </div>
