@@ -1,5 +1,12 @@
 
 .title {
     display: flex;
+    border-bottom: 4px solid grey;
     
+}
+
+.wrapper {
+    border-left: 4px solid blue;
+    padding: 10px;
+    box-shadow:  -15px 0 10px -10px rgba(0, 0, 255, 0.5); /* Тень синего цвета, находящаяся только слева */
 }

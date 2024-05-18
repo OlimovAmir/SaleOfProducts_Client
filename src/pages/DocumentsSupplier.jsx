@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import GetAllSupplier from './supplier/GetAllSupplier';
+import AddSupplierForm from '../form/AddSupplierForm';
 
 
 
@@ -34,6 +35,7 @@ function DocumentsProduct() {
                                 <GetAllSupplier/>
                             </TabPane>
                             <TabPane eventKey='setting'>
+                                <AddSupplierForm/>
                             </TabPane>
                         </TabContent>
                     </Col>

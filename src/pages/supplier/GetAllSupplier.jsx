@@ -24,8 +24,13 @@ function GetAllSupplier() {
     useEffect(() => {
         fetchProducts();
     }, []);
+     // вызов модального окна добавление поставщика
+
+
+
+
     return (
-        <Container>
+        <Container className={styles.wrapper}>
         <div className={styles.title}>
         <h2>Список поставщиков</h2>
             <Button
@@ -37,6 +42,26 @@ function GetAllSupplier() {
                 }}
             >
                 <FontAwesomeIcon icon={faList} /> Add New Supplier
+            </Button>
+            <Button
+                className='m-2'
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+
+                }}
+            >
+                <FontAwesomeIcon icon={faList} /> Export to Excel
+            </Button>
+            <Button
+                className='m-2'
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+
+                }}
+            >
+                <FontAwesomeIcon icon={faList} /> Print out
             </Button>
         </div>
             
