@@ -6,7 +6,6 @@ import nameCharacteristikReduce from './reducers/NameCharacteristikSlice.js';
 import addNameCharacteristicReducer from './reducers/AddNameCharacteristicSlice.js';
 import addSupplierReducer from './reducers/modalAddSupplierSlice.js';
 
-
 export const store = configureStore({
   reducer: {
     modal: modalReducer,
@@ -15,6 +14,5 @@ export const store = configureStore({
     nameCharacteristik: nameCharacteristikReduce,
     addNameCharacteristic: addNameCharacteristicReducer,
     addSupplier: addSupplierReducer,
-
-  }
+  },
 });
