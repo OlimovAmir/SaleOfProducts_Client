@@ -3,6 +3,7 @@ import { closeModal } from '../redux/reducers/modalAddSupplierSlice';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 
 function AddSupplierForm({ onSubmit }) {
   const dispatch = useDispatch();
@@ -19,17 +20,33 @@ function AddSupplierForm({ onSubmit }) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="formSupplierEmail">
-            <Form.Label>Email address</Form.Label>
+          <Form.Group className="mb-3" controlId="formSupplierName">            
             <Form.Control
-              type="email"
-              placeholder="name@example.com"
+              type="text"
+              placeholder="name"
               autoFocus
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formSupplierTextarea">
-            <Form.Label>Example textarea</Form.Label>
-            <Form.Control as="textarea" rows={3} />
+          <Form.Group className="mb-3" controlId="formSupplierAddress">            
+            <Form.Control
+              type="text"
+              placeholder="Address"
+              autoFocus
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formSupplierPhone">            
+            <Form.Control
+              type="phone"
+              placeholder="Phone"
+              autoFocus
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formSupplierINN">            
+            <Form.Control
+              type="number"
+              placeholder="INN"
+              autoFocus
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
