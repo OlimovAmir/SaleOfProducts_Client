@@ -9,13 +9,15 @@ import { openModal } from '../../redux/reducers/modalAddSupplierSlice';
 import AddSupplierForm from '../../form/AddSupplierForm';
 
 function GetAllSupplier() {
-  const [products, setProducts] = useState([]);
+  // Состояние для хранения списка Suppliers
+  const [suppliers, setSuppliers] = useState([]);
+  
   const dispatch = useDispatch();
 
-  const fetchProducts = () => {
+  const fetchSuppliers = () => {
     axios.get('http://localhost:5134/Supplier/AllItems')
       .then(response => {
-        setProducts(response.data);
+        setSuppliers(response.data);
       })
       .catch(error => {
         console.error('Не удалось загрузить список Suppliers:', error);
@@ -23,7 +25,7 @@ function GetAllSupplier() {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchSuppliers();
   }, []);
 
   const handleShow = () => {
@@ -57,18 +59,18 @@ function GetAllSupplier() {
           <div className='col-2'><b>Телефон:</b> </div>
           <div className='col-2'><b>Адрес:</b> </div>
         </div>
-        {products.map(product => (
-          <li key={product.id}>
+        {suppliers.map(supplier => (
+          <li key={supplier.id}>
             <div className='row'>
-              <div className='col-3'> {product.name} </div>
-              <div className='col-2'>{product.inn}</div>
-              <div className='col-2'>{product.phone}</div>
-              <div className='col-2'>{product.address}</div>
+              <div className='col-3'> {supplier.name} </div>
+              <div className='col-2'>{supplier.inn}</div>
+              <div className='col-2'>{supplier.phone}</div>
+              <div className='col-2'>{supplier.address}</div>
             </div>
           </li>
         ))}
       </ol>
-      <AddSupplierForm />
+      <AddSupplierForm updateSupplierList={fetchSuppliers} />
     </Container>
   );
 }
