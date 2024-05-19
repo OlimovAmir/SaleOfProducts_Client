@@ -4,6 +4,7 @@ import modalReducer from './reducers/modalAddGroupSlice.js';
 import successReducer from '../redux/reducers/successSlice.js';
 import nameCharacteristikReduce from './reducers/NameCharacteristikSlice.js';
 import addNameCharacteristicReducer from './reducers/AddNameCharacteristicSlice.js';
+import addSupplierReducer from './reducers/modalAddSupplierSlice.js';
 
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     success: successReducer,
     nameCharacteristik: nameCharacteristikReduce,
     addNameCharacteristic: addNameCharacteristicReducer,
+    addSupplier: addSupplierReducer,
 
   }
 });
