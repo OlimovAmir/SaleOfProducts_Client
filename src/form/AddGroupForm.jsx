@@ -30,6 +30,7 @@ function AddGroupForm({ onSubmit, onClose }) {
     };
 
     const dispatch = useDispatch();
+    
     const handleCloseModal = () => {
         setShowSuccessModal(false); // Закрыть модальное окно
         onClose(); // Закрыть форму или выполнить любые другие необходимые действия

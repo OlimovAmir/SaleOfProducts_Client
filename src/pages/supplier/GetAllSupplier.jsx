@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import styles from './Supplier.module.css';
-import { openModal } from '../../redux/reducers/modalAddSupplierSlice';
+import SuccessModal from '../../components/SuccessModal.jsx';
+import { openModal, closeModal } from '../../redux/reducers/modalAddSupplierSlice';
 import AddSupplierForm from '../../form/AddSupplierForm';
 
-function GetAllSupplier() {
-  // Состояние для хранения списка Suppliers
+function GetAllSupplier({ onSubmit }) {
   const [suppliers, setSuppliers] = useState([]);
-  
-  const dispatch = useDispatch();
+  const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
+  const showModal = useSelector((state) => state.addSupplier.showModal);
+
 
   const fetchSuppliers = () => {
     axios.get('http://localhost:5134/Supplier/AllItems')
       .then(response => {
         setSuppliers(response.data);
+        console.log(response.data);
       })
       .catch(error => {
-        console.error('Не удалось загрузить список Suppliers:', error);
+        console.error('Не удалось загрузить список поставщиков:', error);
       });
   };
 
@@ -28,12 +32,52 @@ function GetAllSupplier() {
     fetchSuppliers();
   }, []);
 
+  // Redux
+  const dispatch = useDispatch();
+  const [selectedSupplier, setSelectedSupplier] = useState(null); // Состояние для выбранной группы
+
+  const handleCloseModal = () => {
+    dispatch(hideModal());
+    setSelectedSupplier(null);
+  };
+
+  const handleDelete = async (groupId) => {
+    try {
+
+      await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
+      setSuppliers(prevGroups => prevGroups.filter(group => group.id !== groupId)); // Используем функцию обновления состояния
+      dispatch(showModalSuccess());
+      setSelectedSupplier(groupId);
+    } catch (error) {
+      console.error('Ошибка при удалении объекта:', error);
+    }
+  };
+  const handleShowAddModal = () => {
+    setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
+  };
+
+  // код для поиска объекта
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredGroups = suppliers.filter(group =>
+    group.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
   const handleShow = () => {
     dispatch(openModal());
   };
-
   return (
     <Container className={styles.wrapper}>
+      <Form.Control
+        type="text"
+        placeholder="Search"
+        className="mr-sm-2 w-50"
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       <div className={styles.title}>
         <h2>Список поставщиков</h2>
         <Button
@@ -42,16 +86,16 @@ function GetAllSupplier() {
           variant="secondary"
           onClick={handleShow}
         >
-          <FontAwesomeIcon icon={faList} /> Add New Supplier
+          <FontAwesomeIcon icon={faList} /> Добавить нового поставщика
         </Button>
         <Button className='m-2' size="sm" variant="secondary">
-          <FontAwesomeIcon icon={faList} /> Export to Excel
+          <FontAwesomeIcon icon={faList} /> Экспорт в Excel
         </Button>
         <Button className='m-2' size="sm" variant="secondary">
-          <FontAwesomeIcon icon={faList} /> Print out
+          <FontAwesomeIcon icon={faList} /> Печать
         </Button>
       </div>
-      
+
       <ol>
         <div className='row'>
           <div className='col-3'> <b>Наименование:</b> </div>
@@ -70,7 +114,15 @@ function GetAllSupplier() {
           </li>
         ))}
       </ol>
-      <AddSupplierForm updateSupplierList={fetchSuppliers} />
+
+
+      <AddSupplierForm
+        showAddModal={showAddModal}
+        handleClose={() => setShowAddModal(false)}
+        updateGroupList={fetchSuppliers} // Передаем функцию обновления списка групп
+
+      />
+
     </Container>
   );
 }

@@ -5,8 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import axios from 'axios';
-import { performAsyncOperation } from '../redux/thunk/successAsyncThunkSlice';
-import SuccessModal from '../components/SuccessModal'; // Подключаем модальное окно
+import SuccessModal from '../components/SuccessModal';
 
 function AddSupplierForm({ onClose }) {
   const dispatch = useDispatch();
@@ -20,6 +19,7 @@ function AddSupplierForm({ onClose }) {
 
   const handleClose = () => {
     dispatch(closeModal());
+    if (onClose) onClose(); // вызываем onClose если он передан
   };
 
   const handleSubmit = async (event) => {
@@ -41,28 +41,23 @@ function AddSupplierForm({ onClose }) {
     }
   };
 
-  const handleCloseModal = () => {
-    setShowSuccessModal(false); // Закрыть модальное окно
-    onClose(); // Закрыть форму или выполнить любые другие необходимые действия
-  };
-
   const handleSuccessClose = () => {
-    dispatch(performAsyncOperation());
-    handleCloseModal(); // Закрыть модальное окно после успешной асинхронной операции
+    setShowSuccessModal(false); // Закрыть модальное окно
+    if (onClose) onClose(); // Закрыть форму или выполнить любые другие необходимые действия
   };
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Add New Supplier</Modal.Title>
+          <Modal.Title>Добавить нового поставщика</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formSupplierName">
               <Form.Control
                 type="text"
-                placeholder="name"
+                placeholder="Название"
                 value={supplierName}
                 onChange={(e) => setSupplierName(e.target.value)}
                 required
@@ -71,7 +66,7 @@ function AddSupplierForm({ onClose }) {
             <Form.Group className="mb-3" controlId="formSupplierAddress">
               <Form.Control
                 type="text"
-                placeholder="Address"
+                placeholder="Адрес"
                 value={supplierAddress}
                 onChange={(e) => setSupplierAddress(e.target.value)}
                 required
@@ -80,7 +75,7 @@ function AddSupplierForm({ onClose }) {
             <Form.Group className="mb-3" controlId="formSupplierPhone">
               <Form.Control
                 type="phone"
-                placeholder="Phone"
+                placeholder="Телефон"
                 value={supplierPhone}
                 onChange={(e) => setSupplierPhone(e.target.value)}
                 required
@@ -89,7 +84,7 @@ function AddSupplierForm({ onClose }) {
             <Form.Group className="mb-3" controlId="formSupplierINN">
               <Form.Control
                 type="number"
-                placeholder="INN"
+                placeholder="ИНН"
                 value={supplierINN}
                 onChange={(e) => setSupplierINN(e.target.value)}
                 required
@@ -97,16 +92,16 @@ function AddSupplierForm({ onClose }) {
             </Form.Group>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                Закрыть
               </Button>
               <Button variant="primary" type="submit">
-                Save
+                Сохранить
               </Button>
             </Modal.Footer>
           </Form>
         </Modal.Body>
       </Modal>
-      <SuccessModal show={showSuccessModal} onClose={handleSuccessClose} />
+      <SuccessModal show={showSuccessModal} handleClose={handleSuccessClose} />
     </>
   );
 }
