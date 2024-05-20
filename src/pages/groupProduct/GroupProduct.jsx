@@ -5,9 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
 import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faInfo, faPen, faList } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
@@ -131,6 +129,9 @@ function GroupProduct({ onSubmit }) {
                                         }}
                                     >
                                         <FontAwesomeIcon icon={faList} /> Add Name Characteristik
+                                    </Button>
+                                    <Button className='m-2' size="sm" variant="outline-info"> 
+                                    <FontAwesomeIcon icon={faInfo} />
                                     </Button>
                                 </div>
                             </li>
