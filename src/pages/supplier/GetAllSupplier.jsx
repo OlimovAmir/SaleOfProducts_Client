@@ -16,7 +16,6 @@ function GetAllSupplier({ onSubmit }) {
   const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
   const showModal = useSelector((state) => state.addSupplier.showModal);
 
-
   const fetchSuppliers = () => {
     axios.get('http://localhost:5134/Supplier/AllItems')
       .then(response => {
@@ -43,7 +42,6 @@ function GetAllSupplier({ onSubmit }) {
 
   const handleDelete = async (groupId) => {
     try {
-
       await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
       setSuppliers(prevGroups => prevGroups.filter(group => group.id !== groupId)); // Используем функцию обновления состояния
       dispatch(showModalSuccess());
@@ -52,6 +50,7 @@ function GetAllSupplier({ onSubmit }) {
       console.error('Ошибка при удалении объекта:', error);
     }
   };
+
   const handleShowAddModal = () => {
     setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
   };
@@ -65,10 +64,13 @@ function GetAllSupplier({ onSubmit }) {
   const filteredGroups = suppliers.filter(group =>
     group.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
+
   const handleShow = () => {
     dispatch(openModal());
   };
+
   return (
     <Container className={styles.wrapper}>
       <Form.Control
@@ -103,7 +105,7 @@ function GetAllSupplier({ onSubmit }) {
           <div className='col-2'><b>Телефон:</b> </div>
           <div className='col-2'><b>Адрес:</b> </div>
         </div>
-        {suppliers.map(supplier => (
+        {filteredGroups.map(supplier => (
           <li key={supplier.id}>
             <div className='row'>
               <div className='col-3'> {supplier.name} </div>
@@ -115,14 +117,11 @@ function GetAllSupplier({ onSubmit }) {
         ))}
       </ol>
 
-
       <AddSupplierForm
         showAddModal={showAddModal}
         handleClose={() => setShowAddModal(false)}
         updateGroupList={fetchSuppliers} // Передаем функцию обновления списка групп
-
       />
-
     </Container>
   );
 }
