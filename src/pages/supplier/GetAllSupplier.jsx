@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faFileExport, faTrash, faList, faPrint} from '@fortawesome/free-solid-svg-icons';
+import { faPen, faFileExport, faTrash, faList, faPrint, faInfo } from '@fortawesome/free-solid-svg-icons';
 import styles from './Supplier.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import { openModal, closeModal } from '../../redux/reducers/modalAddSupplierSlice';
@@ -91,10 +91,10 @@ function GetAllSupplier({ onSubmit }) {
           <FontAwesomeIcon icon={faList} /> Добавить нового поставщика
         </Button>
         <Button className='m-2' size="sm" variant="secondary">
-        <FontAwesomeIcon icon={faFileExport} /> Экспорт в Excel
+          <FontAwesomeIcon icon={faFileExport} /> Экспорт в Excel
         </Button>
         <Button className='m-2' size="sm" variant="secondary">
-        <FontAwesomeIcon icon={faPrint} /> Печать
+          <FontAwesomeIcon icon={faPrint} /> Печать
         </Button>
       </div>
 
@@ -106,16 +106,25 @@ function GetAllSupplier({ onSubmit }) {
           <div className='col-2'><b>Адрес:</b> </div>
         </div>
         {filteredGroups.map(supplier => (
-          <li key={supplier.id}>
+          <li key={supplier.id} className={styles.itemRow}>
             <div className='row'>
               <div className='col-3'> {supplier.name} </div>
               <div className='col-1'>{supplier.inn}</div>
               <div className='col-1'>{supplier.phone}</div>
               <div className='col-2'>{supplier.address}</div>
               <div className='col-1'>
-                <Button className='m-2' size="sm" variant="outline-info">
-                  <FontAwesomeIcon icon={faPen} />
-                </Button>
+                <div className='row'>
+                  <div className='col-6'>
+                    <Button className='m-2' size="sm" variant="outline-info">
+                      <FontAwesomeIcon icon={faInfo} />
+                    </Button>
+                  </div>
+                  <div className='col-6'>
+                    <Button className='m-2' size="sm" variant="outline-info">
+                      <FontAwesomeIcon icon={faPen} />
+                    </Button>
+                  </div>
+                </div>
               </div>
               <div className='col-1'>
                 <Button className='m-2' size="sm" variant="outline-danger">

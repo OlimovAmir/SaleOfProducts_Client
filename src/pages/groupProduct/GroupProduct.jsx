@@ -130,8 +130,8 @@ function GroupProduct({ onSubmit }) {
                                     >
                                         <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                     </Button>
-                                    <Button className='m-2' size="sm" variant="outline-info"> 
-                                    <FontAwesomeIcon icon={faInfo} />
+                                    <Button className='m-2' size="sm" variant="outline-info">
+                                        <FontAwesomeIcon icon={faInfo} />
                                     </Button>
                                 </div>
                             </li>
