@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
 
 import { logout } from '../../redux/reducers/authSlice.js'; // Подключаем action creator для выхода из системы
+import DocumentCustomer from '../../pages/customer/DocumentCustomer.jsx';
 
 
 function Header() {
@@ -62,7 +63,7 @@ function Header() {
                                     <NavDropdown.Item as={NavLink} to="/documentProduct">{language === 'en' ? 'Product' : 'Товар'}</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/documentsUnits">{language === 'en' ? 'Unit' : 'Ед. изм.'}</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/documentSupplier">{language === 'en' ? 'Supplier' : 'Поставщик'}</NavDropdown.Item>
-                                    <NavDropdown.Item as={NavLink} to="/documentCustomer">{language === 'en' ? 'Customer' : 'Покупатель'}</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="documentCustomer">{language === 'en' ? 'Customer' : 'Покупатель'}</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/documentCash">{language === 'en' ? 'Cash' : 'Касса'}</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">{language === 'en' ? 'Setting' : 'Настройка'}</NavDropdown.Item>
@@ -112,6 +113,7 @@ function Header() {
                     <Route path="/documentsUnits" element={<DocumentsUnits />} />
                     <Route path="/documentProduct" element={<DocumentsProduct />} />
                     <Route path="/documentSupplier" element={<DocumentsSupplier />} />
+                    <Route path="/documentCustomer" element={<DocumentCustomer/>} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                 </Routes>
