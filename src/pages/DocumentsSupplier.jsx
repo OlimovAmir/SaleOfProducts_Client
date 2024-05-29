@@ -15,7 +15,7 @@ function DocumentsProduct() {
                     <Col sm={2}>
                         <Nav variant='pills' className='flex-column mt-2'>                            
                             <NavItem>
-                                <Nav.Link eventKey='getAll' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='first' className="nav-link" style={{ textAlign: 'left' }}>
                                     {language === 'en' ? 'Get All Supplier' : 'Список всех поставщиков'}
                                 </Nav.Link>
                             </NavItem>
@@ -29,10 +29,10 @@ function DocumentsProduct() {
                     <Col sm={10}>
                         <TabContent>
                             <TabPane eventKey='first'>
-
+                            <GetAllSupplier/>
                             </TabPane>
                             <TabPane eventKey='getAll'>
-                                <GetAllSupplier/>
+                                
                             </TabPane>
                             <TabPane eventKey='setting'>
                                 <AddSupplierForm/>

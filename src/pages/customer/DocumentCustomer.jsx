@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap';
+import GetAllCustomer from './GetAllCustomer';
 
 function DocumentCustomer() {
     const language = useSelector(state => state.language.value);
@@ -11,7 +12,7 @@ function DocumentCustomer() {
                     <Col sm={2}>
                         <Nav variant='pills' className='flex-column mt-2'>                            
                             <NavItem>
-                                <Nav.Link eventKey='getAll' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='first' className="nav-link" style={{ textAlign: 'left' }}>
                                     {language === 'en' ? 'Get All Customer' : 'Список всех Поставщиков'}
                                 </Nav.Link>
                             </NavItem>
@@ -25,7 +26,7 @@ function DocumentCustomer() {
                     <Col sm={10}>
                         <TabContent>
                             <TabPane eventKey='first'>
-
+                                <GetAllCustomer/>
                             </TabPane>
                             <TabPane eventKey='getAll'>
                                 

@@ -10,8 +10,10 @@ import styles from './Supplier.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import { openModal, closeModal } from '../../redux/reducers/modalAddSupplierSlice';
 import AddSupplierForm from '../../form/AddSupplierForm';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
-function GetAllSupplier({ onSubmit }) {
+function GetAllSupplier({ onSubmit, data }) {
   const [suppliers, setSuppliers] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
   const showModal = useSelector((state) => state.addSupplier.showModal);
@@ -71,6 +73,26 @@ function GetAllSupplier({ onSubmit }) {
     dispatch(openModal());
   };
 
+  // Export excel
+  const handleExport = () => {
+    // Преобразование данных в формат листа Excel
+    const worksheet = XLSX.utils.json_to_sheet(suppliers);
+
+    // Создание книги Excel
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+    // Создание бинарного объекта Excel
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array'
+    });
+
+    // Создание Blob и сохранение файла
+    const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, 'ListSupplier.xlsx');
+  };
+
   return (
     <Container className={styles.wrapper}>
       <Form.Control
@@ -90,7 +112,7 @@ function GetAllSupplier({ onSubmit }) {
         >
           <FontAwesomeIcon icon={faList} /> Добавить нового поставщика
         </Button>
-        <Button className='m-2' size="sm" variant="secondary">
+        <Button className='m-2' size="sm" variant="secondary" onClick={handleExport}>
           <FontAwesomeIcon icon={faFileExport} /> Экспорт в Excel
         </Button>
         <Button className='m-2' size="sm" variant="secondary">
@@ -127,7 +149,7 @@ function GetAllSupplier({ onSubmit }) {
                 </div>
               </div>
               <div className='col-1'>
-                <Button className='m-2' size="sm" variant="outline-danger">
+                <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(supplier.id)}>
                   <FontAwesomeIcon icon={faTrash} />
                 </Button>
               </div>

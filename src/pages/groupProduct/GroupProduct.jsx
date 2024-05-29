@@ -13,7 +13,8 @@ import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.js
 
 
 
-function GroupProduct({ onSubmit }) {
+
+function GroupProduct({ onSubmit, data }) {
     // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
@@ -84,6 +85,9 @@ function GroupProduct({ onSubmit }) {
         group.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
+
+
+
     return (
         <div className={styles.wrapper}>
             <div className='d-flex align-items-center'>

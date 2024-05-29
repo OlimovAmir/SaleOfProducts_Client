@@ -10,7 +10,7 @@ function DocumentsProduct() {
     const language = useSelector(state => state.language.value);
     return (
         <>
-            <TabContainer id='ledt-tabs-example' defaultActiveKey='first'>
+            <TabContainer id='ledt-tabs-example' defaultActiveKey='groupProduct'>
                 <Row>
                     <Col sm={2}>
                         <Nav variant='pills' className='flex-column mt-2'>
@@ -35,7 +35,7 @@ function DocumentsProduct() {
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
-                                <Nav.Link eventKey='GroupProduct' className="nav-link" style={{ textAlign: 'left' }}>
+                                <Nav.Link eventKey='groupProduct' className="nav-link" style={{ textAlign: 'left' }}>
                                 {language === 'en' ? 'Group product' : 'Спикок группа продуктов'}
                                 </Nav.Link>
                             </NavItem>
@@ -60,7 +60,7 @@ function DocumentsProduct() {
                             <TabPane eventKey='getAll'>
                                 <GetAllProduct/>
                             </TabPane>
-                            <TabPane eventKey='GroupProduct'>
+                            <TabPane eventKey='groupProduct'>
                                 <GroupProduct/>
                             </TabPane>
                             <TabPane eventKey='setting'>
