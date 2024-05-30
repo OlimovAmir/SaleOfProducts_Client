@@ -12,6 +12,8 @@ import { openModal, closeModal } from '../../redux/reducers/modalAddSupplierSlic
 import AddSupplierForm from '../../form/AddSupplierForm';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 function GetAllSupplier({ onSubmit, data }) {
   const [suppliers, setSuppliers] = useState([]);
@@ -137,21 +139,51 @@ function GetAllSupplier({ onSubmit, data }) {
               <div className='col-1'>
                 <div className='row'>
                   <div className='col-6'>
-                    <Button className='m-2' size="sm" variant="outline-info">
-                      <FontAwesomeIcon icon={faInfo} />
-                    </Button>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={
+                        <Tooltip id="tooltip-top">
+                          Full information
+                        </Tooltip>
+                      }
+                    >
+                      <Button className='m-2' size="sm" variant="outline-info">
+                        <FontAwesomeIcon icon={faInfo} />
+                      </Button>
+                    </OverlayTrigger>
+
                   </div>
                   <div className='col-6'>
-                    <Button className='m-2' size="sm" variant="outline-info">
-                      <FontAwesomeIcon icon={faPen} />
-                    </Button>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={
+                        <Tooltip id="tooltip-top">
+                          Modification or correction
+                        </Tooltip>
+                      }
+                    >
+                      <Button className='m-2' size="sm" variant="outline-info">
+                        <FontAwesomeIcon icon={faPen} />
+                      </Button>
+                    </OverlayTrigger>
+
                   </div>
                 </div>
               </div>
               <div className='col-1'>
-                <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(supplier.id)}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </Button>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={
+                    <Tooltip id="tooltip-top">
+                      Delete
+                    </Tooltip>
+                  }
+                >
+                  <Button className='m-2' size="sm" variant="outline-danger" onClick={() => handleDelete(supplier.id)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </Button>
+                </OverlayTrigger>
+
               </div>
             </div>
           </li>
