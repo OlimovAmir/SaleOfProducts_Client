@@ -10,7 +10,8 @@ import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
 import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.jsx';
-
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 
 
@@ -121,9 +122,21 @@ function GroupProduct({ onSubmit, data }) {
                                     >
                                         <FontAwesomeIcon icon={faTrash} />
                                     </Button>
-                                    <Button className='m-2' size="sm" variant="outline-info">
-                                        <FontAwesomeIcon icon={faPen} />
-                                    </Button>
+
+                                    <OverlayTrigger
+                                        placement="top"
+                                        overlay={
+                                            <Tooltip id="tooltip-top">
+                                                Modification or correction
+                                            </Tooltip>
+                                        }
+                                    >
+                                        <Button className='m-2' size="sm" variant="outline-info">
+                                            <FontAwesomeIcon icon={faPen} />
+                                        </Button>
+                                    </OverlayTrigger>
+
+
                                     <Button
                                         className='m-2'
                                         size="sm"
