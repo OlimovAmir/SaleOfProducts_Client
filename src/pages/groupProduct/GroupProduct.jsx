@@ -114,7 +114,15 @@ function GroupProduct({ onSubmit, data }) {
                             <li key={index} className={styles.groupListItem}>
                                 <div className={styles.groupName}>{group.name}</div>
                                 <div className={styles.groupActions}>
-                                    <Button
+                                <OverlayTrigger
+                                        placement="top"
+                                        overlay={
+                                            <Tooltip id="tooltip-top">
+                                                Delete
+                                            </Tooltip>
+                                        }
+                                    >
+                                       <Button
                                         className='m-2'
                                         size="sm"
                                         variant="outline-danger"
@@ -122,6 +130,8 @@ function GroupProduct({ onSubmit, data }) {
                                     >
                                         <FontAwesomeIcon icon={faTrash} />
                                     </Button>
+                                    </OverlayTrigger>
+                                    
 
                                     <OverlayTrigger
                                         placement="top"
@@ -147,9 +157,21 @@ function GroupProduct({ onSubmit, data }) {
                                     >
                                         <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                     </Button>
-                                    <Button className='m-2' size="sm" variant="outline-info">
+
+
+                                    <OverlayTrigger
+                                        placement="top"
+                                        overlay={
+                                            <Tooltip id="tooltip-top">
+                                                Full information
+                                            </Tooltip>
+                                        }
+                                    >
+                                       <Button className='m-2' size="sm" variant="outline-info">
                                         <FontAwesomeIcon icon={faInfo} />
                                     </Button>
+                                    </OverlayTrigger>
+                                    
                                 </div>
                             </li>
                         ))}
