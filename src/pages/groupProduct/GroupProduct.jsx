@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container, Form, Offcanvas, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
@@ -10,21 +10,18 @@ import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
 import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.jsx';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
-
-
 
 function GroupProduct({ onSubmit, data }) {
-    // Состояние для хранения списка GroupProduct
     const [groups, setGroups] = useState([]);
-    const [showAddModal, setShowAddModal] = useState(false); // Состояние для открытия/закрытия модального окна добавления группы
+    const [showAddModal, setShowAddModal] = useState(false);
     const [showModalName, setShowModalName] = useState(false);
-    // Функция для загрузки данных о GroupProduct из базы
+    const [showOffcanvas, setShowOffcanvas] = useState(false); // Состояние для Offcanvas
+    const dispatch = useDispatch();
+    const [selectedGroup, setSelectedGroup] = useState(null);
+
     const fetchGroups = () => {
         axios.get('http://localhost:5134/GroupProduct/AllItems')
             .then(response => {
-                // Устанавливаем полученные данные о GroupProduct в состояние
                 setGroups(response.data);
                 console.log(response.data);
             })
@@ -33,15 +30,9 @@ function GroupProduct({ onSubmit, data }) {
             });
     };
 
-
-    // Загрузка списка GroupProduct при монтировании компонента
     useEffect(() => {
         fetchGroups();
     }, []);
-
-    // Redux
-    const dispatch = useDispatch();
-    const [selectedGroup, setSelectedGroup] = useState(null); // Состояние для выбранной группы
 
     const handleCloseModal = () => {
         dispatch(hideModal());
@@ -50,9 +41,8 @@ function GroupProduct({ onSubmit, data }) {
 
     const handleDelete = async (groupId) => {
         try {
-
             await axios.delete(`http://localhost:5134/GroupProduct/Delete?id=${groupId}`);
-            setGroups(prevGroups => prevGroups.filter(group => group.id !== groupId)); // Используем функцию обновления состояния
+            setGroups(prevGroups => prevGroups.filter(group => group.id !== groupId));
             dispatch(showModalSuccess());
             setSelectedGroup(groupId);
         } catch (error) {
@@ -60,24 +50,21 @@ function GroupProduct({ onSubmit, data }) {
         }
     };
 
-
     const handleShowAddModal = () => {
-        setShowAddModal(true); // Устанавливаем состояние, чтобы открыть модальное окно добавления группы
+        setShowAddModal(true);
     };
 
     const handleNameCha = (groupId, groupName) => {
         console.log('groupId:', groupId);
         setSelectedGroupId(groupId);
         setSelectedGroupName(groupName);
-        setShowModalName(true); // Вызываем действие для показа модального окна
-
+        setShowModalName(true);
     };
 
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const [selectedGroupName, setSelectedGroupName] = useState(null);
-
-    // код для поиска объекта
     const [searchTerm, setSearchTerm] = useState('');
+
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -87,7 +74,8 @@ function GroupProduct({ onSubmit, data }) {
     );
     filteredGroups.sort((a, b) => a.name.localeCompare(b.name));
 
-
+    const handleShowOffcanvas = () => setShowOffcanvas(true);
+    const handleCloseOffcanvas = () => setShowOffcanvas(false);
 
     return (
         <div className={styles.wrapper}>
@@ -103,7 +91,7 @@ function GroupProduct({ onSubmit, data }) {
                 <AddGroupModal
                     showAddModal={showAddModal}
                     handleClose={() => setShowAddModal(false)}
-                    updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
+                    updateGroupList={fetchGroups}
                 />
                 <Button className='m-2' size="sm" variant="secondary">
                     <FontAwesomeIcon icon={faFileExport} /> Экспорт в Excel
@@ -114,22 +102,16 @@ function GroupProduct({ onSubmit, data }) {
 
                 <OverlayTrigger
                     placement="top"
-                    overlay={
-                        <Tooltip id="tooltip-top">
-                            Additional menu
-                        </Tooltip>
-                    }
+                    overlay={<Tooltip id="tooltip-top">Additional menu</Tooltip>}
                 >
-                    <Button className='m-2' size="sm" variant="secondary">
+                    <Button className='m-2' size="sm" variant="secondary" onClick={handleShowOffcanvas}>
                         <FontAwesomeIcon icon={faBars} />
                     </Button>
                 </OverlayTrigger>
-
-
             </div>
             <div>
                 <Container>
-                    <h2 className={styles.titleGroup} >Группа продуктов</h2>
+                    <h2 className={styles.titleGroup}>Группа продуктов</h2>
                     <ul>
                         {filteredGroups.map((group, index) => (
                             <li key={index} className={styles.groupListItem}>
@@ -137,11 +119,7 @@ function GroupProduct({ onSubmit, data }) {
                                 <div className={styles.groupActions}>
                                     <OverlayTrigger
                                         placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-top">
-                                                Delete
-                                            </Tooltip>
-                                        }
+                                        overlay={<Tooltip id="tooltip-top">Delete</Tooltip>}
                                     >
                                         <Button
                                             className='m-2'
@@ -153,20 +131,14 @@ function GroupProduct({ onSubmit, data }) {
                                         </Button>
                                     </OverlayTrigger>
 
-
                                     <OverlayTrigger
                                         placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-top">
-                                                Modification or correction
-                                            </Tooltip>
-                                        }
+                                        overlay={<Tooltip id="tooltip-top">Modification or correction</Tooltip>}
                                     >
                                         <Button className='m-2' size="sm" variant="outline-info">
                                             <FontAwesomeIcon icon={faPen} />
                                         </Button>
                                     </OverlayTrigger>
-
 
                                     <Button
                                         className='m-2'
@@ -179,20 +151,14 @@ function GroupProduct({ onSubmit, data }) {
                                         <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                     </Button>
 
-
                                     <OverlayTrigger
                                         placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-top">
-                                                Full information
-                                            </Tooltip>
-                                        }
+                                        overlay={<Tooltip id="tooltip-top">Full information</Tooltip>}
                                     >
                                         <Button className='m-2' size="sm" variant="outline-info">
                                             <FontAwesomeIcon icon={faInfo} />
                                         </Button>
                                     </OverlayTrigger>
-
                                 </div>
                             </li>
                         ))}
@@ -201,11 +167,20 @@ function GroupProduct({ onSubmit, data }) {
                     <ModalNameCharacteristik
                         show={showModalName}
                         handleClose={() => setShowModalName(false)}
-                        groupId={selectedGroupId} // Передаем groupId в компонент ModalNameCharacteristik
+                        groupId={selectedGroupId}
                         groupName={selectedGroupName}
                     />
                 </Container>
             </div>
+
+            <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="end">
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                </Offcanvas.Body>
+            </Offcanvas>
         </div>
     )
 }
