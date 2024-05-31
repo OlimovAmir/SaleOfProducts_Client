@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
 import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faInfo, faPen, faList, faPrint, faFileExport, } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faInfo, faPen, faList, faPrint, faFileExport, faBars } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
@@ -111,6 +111,21 @@ function GroupProduct({ onSubmit, data }) {
                 <Button className='m-2' size="sm" variant="secondary">
                     <FontAwesomeIcon icon={faPrint} /> Печать
                 </Button>
+
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id="tooltip-top">
+                            Additional menu
+                        </Tooltip>
+                    }
+                >
+                    <Button className='m-2' size="sm" variant="secondary">
+                        <FontAwesomeIcon icon={faBars} />
+                    </Button>
+                </OverlayTrigger>
+
+
             </div>
             <div>
                 <Container>
