@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
 import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faInfo, faPen, faList } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faInfo, faPen, faList, faPrint, faFileExport, } from '@fortawesome/free-solid-svg-icons';
 import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
@@ -105,6 +105,12 @@ function GroupProduct({ onSubmit, data }) {
                     handleClose={() => setShowAddModal(false)}
                     updateGroupList={fetchGroups} // Передаем функцию обновления списка групп
                 />
+                <Button className='m-2' size="sm" variant="secondary">
+                    <FontAwesomeIcon icon={faFileExport} /> Экспорт в Excel
+                </Button>
+                <Button className='m-2' size="sm" variant="secondary">
+                    <FontAwesomeIcon icon={faPrint} /> Печать
+                </Button>
             </div>
             <div>
                 <Container>
@@ -114,7 +120,7 @@ function GroupProduct({ onSubmit, data }) {
                             <li key={index} className={styles.groupListItem}>
                                 <div className={styles.groupName}>{group.name}</div>
                                 <div className={styles.groupActions}>
-                                <OverlayTrigger
+                                    <OverlayTrigger
                                         placement="top"
                                         overlay={
                                             <Tooltip id="tooltip-top">
@@ -122,16 +128,16 @@ function GroupProduct({ onSubmit, data }) {
                                             </Tooltip>
                                         }
                                     >
-                                       <Button
-                                        className='m-2'
-                                        size="sm"
-                                        variant="outline-danger"
-                                        onClick={() => handleDelete(group.id)}
-                                    >
-                                        <FontAwesomeIcon icon={faTrash} />
-                                    </Button>
+                                        <Button
+                                            className='m-2'
+                                            size="sm"
+                                            variant="outline-danger"
+                                            onClick={() => handleDelete(group.id)}
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} />
+                                        </Button>
                                     </OverlayTrigger>
-                                    
+
 
                                     <OverlayTrigger
                                         placement="top"
@@ -167,11 +173,11 @@ function GroupProduct({ onSubmit, data }) {
                                             </Tooltip>
                                         }
                                     >
-                                       <Button className='m-2' size="sm" variant="outline-info">
-                                        <FontAwesomeIcon icon={faInfo} />
-                                    </Button>
+                                        <Button className='m-2' size="sm" variant="outline-info">
+                                            <FontAwesomeIcon icon={faInfo} />
+                                        </Button>
                                     </OverlayTrigger>
-                                    
+
                                 </div>
                             </li>
                         ))}
