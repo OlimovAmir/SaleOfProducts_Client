@@ -10,6 +10,7 @@ import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
 import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.jsx';
+import { showModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice.js';
 
 function GroupProduct({ onSubmit, data }) {
     const [groups, setGroups] = useState([]);
@@ -76,6 +77,13 @@ function GroupProduct({ onSubmit, data }) {
 
     const handleShowOffcanvas = () => setShowOffcanvas(true);
     const handleCloseOffcanvas = () => setShowOffcanvas(false);
+
+    // showModalInfo
+
+    const handleShowModalInfo = () => {
+        dispatch(showModalInfo());
+        
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -155,7 +163,7 @@ function GroupProduct({ onSubmit, data }) {
                                         placement="top"
                                         overlay={<Tooltip id="tooltip-top">Full information</Tooltip>}
                                     >
-                                        <Button className='m-2' size="sm" variant="outline-info">
+                                        <Button className='m-2' size="sm" variant="outline-info" onClick={handleShowModalInfo}>
                                             <FontAwesomeIcon icon={faInfo} />
                                         </Button>
                                     </OverlayTrigger>

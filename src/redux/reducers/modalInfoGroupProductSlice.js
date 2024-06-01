@@ -6,14 +6,14 @@ export const modalInfoGroupProductSlice = createSlice({
     showModalInfo: false,
   },
   reducers: {
-    showModal: (state) => {
-      state.showModal = true;
+    showModalInfo: (state) => {
+      state.showModalInfo = true;
     },
-    closeModal: (state) => {
-      state.showModal = false;
+    closeModalInfo: (state) => {
+      state.showModalInfo = false;
     },
   },
 });
 
-export const { showModal, closeModal } = modalInfoGroupProductSlice.actions;
+export const { showModalInfo, closeModalInfo } = modalInfoGroupProductSlice.actions;
 export default modalInfoGroupProductSlice.reducer;
