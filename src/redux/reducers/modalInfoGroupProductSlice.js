@@ -16,4 +16,5 @@ export const modalInfoGroupProductSlice = createSlice({
 });
 
 export const { showModalInfo, closeModalInfo } = modalInfoGroupProductSlice.actions;
+
 export default modalInfoGroupProductSlice.reducer;

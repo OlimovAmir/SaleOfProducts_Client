@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Container, Form, Offcanvas, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showModalSuccess, hideModal } from '../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faInfo, faPen, faList, faPrint, faFileExport, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ import styles from './GroupProduct.module.css';
 import SuccessModal from '../../components/SuccessModal.jsx';
 import AddGroupModal from '../../components/AddGroupModal.jsx';
 import ModalNameCharacteristik from '../../components/ModalNameCharacteristik.jsx';
+import InfoGroupProduct from '../../pages/groupProduct/InfoGroupProduct.jsx';
 import { showModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice.js';
 
 function GroupProduct({ onSubmit, data }) {
@@ -78,11 +79,9 @@ function GroupProduct({ onSubmit, data }) {
     const handleShowOffcanvas = () => setShowOffcanvas(true);
     const handleCloseOffcanvas = () => setShowOffcanvas(false);
 
-    // showModalInfo
-
     const handleShowModalInfo = () => {
         dispatch(showModalInfo());
-        
+        console.log('function handleShowModalInfo test');
     };
 
     return (
@@ -178,6 +177,7 @@ function GroupProduct({ onSubmit, data }) {
                         groupId={selectedGroupId}
                         groupName={selectedGroupName}
                     />
+                    <InfoGroupProduct />
                 </Container>
             </div>
 

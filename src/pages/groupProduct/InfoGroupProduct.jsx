@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { closeModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice.js';
+import { closeModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice';
 
 function InfoGroupProduct() {
     const dispatch = useDispatch();
