@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 import { closeModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice';
 
 function InfoGroupProduct() {
@@ -8,7 +10,33 @@ function InfoGroupProduct() {
     const showModalInfo = useSelector((state) => state.infoGroupProduct.showModalInfo);
     const selectedGroupId = useSelector((state) => state.infoGroupProduct.selectedGroupId);
 
-    const handleClose = () => dispatch(closeModalInfo());
+    const [groupInfo, setGroupInfo] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (selectedGroupId) {
+            const fetchGroupInfo = async () => {
+                setLoading(true);
+                setError(null);
+                try {
+                    const response = await axios.get(`http://localhost:5134/GroupProduct/GetItemById?id=${selectedGroupId}`);
+                    setGroupInfo(response.data);
+                } catch (err) {
+                    setError('Ошибка при загрузке информации о группе');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchGroupInfo();
+        }
+    }, [selectedGroupId]);
+
+    const handleClose = () => {
+        dispatch(closeModalInfo());
+        setGroupInfo(null); // Очистка информации при закрытии модального окна
+        setError(null); // Очистка ошибки при закрытии модального окна
+    };
 
     return (
         <Modal
@@ -18,20 +46,26 @@ function InfoGroupProduct() {
             keyboard={false}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
+                <Modal.Title>Информация о группе</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {selectedGroupId ? (
-                    <p>ID выбранной группы: {selectedGroupId}</p>
+                {loading && <p>Загрузка...</p>}
+                {error && <p>{error}</p>}
+                {groupInfo ? (
+                    <div>
+                        <p>ID: {groupInfo.id}</p>
+                        <p>Название: {groupInfo.name}</p>
+                        {/* Добавьте другие поля по мере необходимости */}
+                    </div>
                 ) : (
-                    <p>Группа не выбрана</p>
+                    !loading && !error && <p>Группа не выбрана</p>
                 )}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    Закрыть
                 </Button>
-                <Button variant="primary">Understood</Button>
+                <Button variant="primary">Понял</Button>
             </Modal.Footer>
         </Modal>
     );
