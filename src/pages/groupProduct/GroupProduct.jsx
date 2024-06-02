@@ -79,9 +79,8 @@ function GroupProduct({ onSubmit, data }) {
     const handleShowOffcanvas = () => setShowOffcanvas(true);
     const handleCloseOffcanvas = () => setShowOffcanvas(false);
 
-    const handleShowModalInfo = () => {
-        dispatch(showModalInfo());
-        console.log('function handleShowModalInfo test');
+    const handleShowModalInfo = (groupId) => {
+        dispatch(showModalInfo(groupId)); // Передаем ID группы
     };
 
     return (
@@ -151,9 +150,7 @@ function GroupProduct({ onSubmit, data }) {
                                         className='m-2'
                                         size="sm"
                                         variant="secondary"
-                                        onClick={() => {
-                                            handleNameCha(group.id, group.name);
-                                        }}
+                                        onClick={() => { handleNameCha(group.id, group.name); }}
                                     >
                                         <FontAwesomeIcon icon={faList} /> Add Name Characteristik
                                     </Button>
@@ -162,7 +159,7 @@ function GroupProduct({ onSubmit, data }) {
                                         placement="top"
                                         overlay={<Tooltip id="tooltip-top">Full information</Tooltip>}
                                     >
-                                        <Button className='m-2' size="sm" variant="outline-info" onClick={handleShowModalInfo}>
+                                        <Button className='m-2' size="sm" variant="outline-info" onClick={() => { handleShowModalInfo(group.id); }}>
                                             <FontAwesomeIcon icon={faInfo} />
                                         </Button>
                                     </OverlayTrigger>
@@ -190,7 +187,7 @@ function GroupProduct({ onSubmit, data }) {
                 </Offcanvas.Body>
             </Offcanvas>
         </div>
-    )
+    );
 }
 
 export default GroupProduct;

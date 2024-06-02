@@ -6,6 +6,7 @@ import { closeModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice'
 function InfoGroupProduct() {
     const dispatch = useDispatch();
     const showModalInfo = useSelector((state) => state.infoGroupProduct.showModalInfo);
+    const selectedGroupId = useSelector((state) => state.infoGroupProduct.selectedGroupId);
 
     const handleClose = () => dispatch(closeModalInfo());
 
@@ -20,8 +21,11 @@ function InfoGroupProduct() {
                 <Modal.Title>Modal title</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                I will not close if you click outside me. Do not even try to press
-                escape key.
+                {selectedGroupId ? (
+                    <p>ID выбранной группы: {selectedGroupId}</p>
+                ) : (
+                    <p>Группа не выбрана</p>
+                )}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

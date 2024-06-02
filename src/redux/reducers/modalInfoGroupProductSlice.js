@@ -1,18 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const modalInfoGroupProductSlice = createSlice({
-  name: 'infoGroupProduct',
-  initialState: {
-    showModalInfo: false,
-  },
-  reducers: {
-    showModalInfo: (state) => {
-      state.showModalInfo = true;
+    name: 'infoGroupProduct',
+    initialState: {
+        showModalInfo: false,
+        selectedGroupId: null,
     },
-    closeModalInfo: (state) => {
-      state.showModalInfo = false;
-    },
-  },
+    reducers: {
+        showModalInfo: (state, action) => {
+            state.showModalInfo = true;
+            state.selectedGroupId = action.payload;
+        },
+        closeModalInfo: (state) => {
+            state.showModalInfo = false;
+            state.selectedGroupId = null;
+        }
+    }
 });
 
 export const { showModalInfo, closeModalInfo } = modalInfoGroupProductSlice.actions;
