@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import { closeModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 function InfoGroupProduct() {
     const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function InfoGroupProduct() {
             keyboard={false}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Информация о группе</Modal.Title>
+                <Modal.Title>Информация о товаре</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {loading && <p>Загрузка...</p>}
@@ -54,8 +55,30 @@ function InfoGroupProduct() {
                 {groupInfo ? (
                     <div>
                         <p>ID: {groupInfo.id}</p>
-                        <p>Название: {groupInfo.name}</p>
-                        {/* Добавьте другие поля по мере необходимости */}
+                        <b >Название: {groupInfo.name}</b>
+                        {groupInfo.nameCharacteristicProducts && groupInfo.nameCharacteristicProducts.length > 0 && (
+                            <div>
+                                <b>Характеристики продукта:</b>
+                                <ul>
+                                    {groupInfo.nameCharacteristicProducts.map((char) => (
+                                        <i key={char.id}>
+                                            <span>{char.name} :</span>
+                                            {char.valueCharacteristicProducts && char.valueCharacteristicProducts.length > 0 && (
+                                                <span>
+                                                    {char.valueCharacteristicProducts.map((value) => (
+                                                        <span key={value.id}>
+                                                            <span> {value.name}</span> <br />
+                                                        </span>
+                                                    ))}
+                                                </span>
+                                            )}
+                                        </i>
+                                        
+                                    ))}
+                                </ul>
+                                
+                            </div>
+                        )}
                     </div>
                 ) : (
                     !loading && !error && <p>Группа не выбрана</p>

@@ -180,10 +180,10 @@ function GroupProduct({ onSubmit, data }) {
 
             <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="end">
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                    <Offcanvas.Title>Additional section</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                There may be additional options here.
                 </Offcanvas.Body>
             </Offcanvas>
         </div>
