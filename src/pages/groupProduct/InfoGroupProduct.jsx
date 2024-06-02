@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import { closeModalInfo } from '../../redux/reducers/modalInfoGroupProductSlice';
-import { text } from '@fortawesome/fontawesome-svg-core';
+
 
 function InfoGroupProduct() {
     const dispatch = useDispatch();
