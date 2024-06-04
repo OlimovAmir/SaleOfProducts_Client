@@ -18,6 +18,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import LanguageSelector from '../../utils/LanguageSelector.js';
 import { logout } from '../../redux/reducers/authSlice.js';
 import DocumentCustomer from '../../pages/customer/DocumentCustomer.jsx';
+import DocumentCashIncome from './../../pages/cash/cashIncome/DocumentCashIncome';
+import DocumentsStatics from '../../pages/statics/DocumentsStatics.jsx';
 
 function Header() {
     const language = useSelector(state => state.language.value);
@@ -51,7 +53,7 @@ function Header() {
                                 <Link to="/about" className="nav-link">{language === 'en' ? 'About us' : 'О нас'}</Link>
                                 <Link to="/documents" className="nav-link">{language === 'en' ? 'Journal' : 'Журналы'}</Link>
                                 <Link to="/blog" className="nav-link">{language === 'en' ? 'Reports' : 'Отчеты'}</Link>
-                                <Nav.Link href="#link">{language === 'en' ? 'Statistics' : 'Статистика'}</Nav.Link>
+                                <Link to="/documentStatics" className="nav-link">{language === 'en' ? 'Statistics' : 'Статистика'}</Link>
                                 <NavDropdown title={<span>{language === 'en' ? 'Documents' : 'Документы'}</span>} id="basic-nav-dropdown">
                                     <NavDropdown.Item as={NavLink} to="/documentEmployee">{language === 'en' ? 'Employee' : 'Сотрудники'}</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/documentProduct">{language === 'en' ? 'Product' : 'Товар'}</NavDropdown.Item>
@@ -106,6 +108,8 @@ function Header() {
                     <Route path="/documentProduct" element={<DocumentsProduct />} />
                     <Route path="/documentSupplier" element={<DocumentsSupplier />} />
                     <Route path="/documentCustomer" element={<DocumentCustomer />} />
+                    <Route path="/documentCash" element={<DocumentCashIncome />} />
+                    <Route path="/documentStatics" element={<DocumentsStatics />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="*" element={<Navigate to="/home" replace />} />
