@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { hideFormAddNameCharacteristic } from '../redux/reducers/AddNameCharacteristicSlice';
+import { Button, Modal } from 'react-bootstrap';
 
 function AddNameCharacteristicForm({ updateCharacteristics }) {
   const [name, setName] = useState('');
@@ -25,7 +26,7 @@ function AddNameCharacteristicForm({ updateCharacteristics }) {
 
   return (
     <div>
-      <h1>Add Name Characteristic</h1>
+      <h4>Add new Name Characteristic</h4>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
@@ -37,8 +38,11 @@ function AddNameCharacteristicForm({ updateCharacteristics }) {
             required
           />
         </div>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={() => dispatch(hideFormAddNameCharacteristic())}>Cancel</button>
+        <Modal.Footer>          
+          <Button type="button" variant="secondary" onClick={() => dispatch(hideFormAddNameCharacteristic())}>Close</Button>
+          <Button type="submit">Submit</Button>
+        </Modal.Footer>
+
       </form>
     </div>
   );

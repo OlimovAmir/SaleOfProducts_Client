@@ -13,7 +13,22 @@ function DocumentsStatics() {
                         <Nav variant='pills' className='flex-column mt-2'>                            
                             <NavItem>
                                 <Nav.Link eventKey='first' className="nav-link" style={{ textAlign: 'left' }}>
-                                    {language === 'en' ? 'Сash income' : 'Поступление'}
+                                    {language === 'en' ? 'Сash income' : 'Поступление Денег'}
+                                </Nav.Link>
+                            </NavItem>
+                            <NavItem>
+                                <Nav.Link eventKey='cashExpenses' className="nav-link" style={{ textAlign: 'left' }}>
+                                    {language === 'en' ? 'Сash Expenses' : 'Расходы Денег'}
+                                </Nav.Link>
+                            </NavItem>
+                            <NavItem>
+                                <Nav.Link eventKey='productPurchase' className="nav-link" style={{ textAlign: 'left' }}>
+                                    {language === 'en' ? 'Product Purchase' : 'Поступление Товара'}
+                                </Nav.Link>
+                            </NavItem>
+                            <NavItem>
+                                <Nav.Link eventKey='returnProduct' className="nav-link" style={{ textAlign: 'left' }}>
+                                    {language === 'en' ? 'Return of the product' : 'Возврат Товара'}
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
