@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, TimeScale } from 'chart.js'; 
 import 'chartjs-adapter-date-fns';
 
-// Регистрируйте все необходимые компоненты
+// Регистрация всех необходимых компонентов
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, TimeScale);
 
 function StaticsCashIncome() {

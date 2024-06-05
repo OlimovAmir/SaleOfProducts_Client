@@ -3,8 +3,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExport, faList, faPrint} from '@fortawesome/free-solid-svg-icons';
 
-
-function GetAllCustomer() {
+function GetAllCach() {
   return (
     <Container className="">
       <Form.Control
@@ -15,7 +14,7 @@ function GetAllCustomer() {
         
       />
       <div className="">
-        <h2>Список </h2>
+        <h2>Список Наличных поступлений</h2>
         <Button
           className='m-2'
           size="sm"
@@ -39,4 +38,4 @@ function GetAllCustomer() {
   )
 }
 
-export default GetAllCustomer
+export default GetAllCach
