@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { showModalSuccess, hideModal } from '../../../redux/reducers/successSlice.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileExport, faList, faPrint, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faFileExport, faList, faPrint } from '@fortawesome/free-solid-svg-icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import styles from './Cash.module.css'; // Assuming you have a CSS module for styling
 
 function GetAllCach() {
   const [cashIncomes, setCashIncomes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const fetchCashIncomes = () => {
     axios.get('http://localhost:5134/CashIncome/AllItems')
       .then(response => {
@@ -41,6 +37,8 @@ function GetAllCach() {
       income.incomeItems.some(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
     )
     .sort((a, b) => a.transactionDate.localeCompare(b.transactionDate));
+
+  const totalAmount = filteredCashIncomes.reduce((sum, income) => sum + income.amount, 0);
 
   const handleExport = () => {
     const exportData = cashIncomes.map(income => ({
@@ -89,21 +87,30 @@ function GetAllCach() {
         <div className='row'>
           <div className='col-2'><b>От кого:</b></div>
           <div className='col-3'><b>Наименование дохода:</b></div>
-          <div className='col-2'><b>Дата транзакции:</b></div>
-          <div className='col-2'><b>Сумма:</b></div>
-          <div className='col-3'><b>Описание:</b></div>
+          <div className='col-1'><b>Дата</b></div>
+          <div className='col-1'><b>Сумма:</b></div>
+          <div className='col-2'><b>Описание:</b></div>
         </div>
         {filteredCashIncomes.map(income => (
           <li key={income.id} className={styles.itemRow}>
             <div className='row'>
               <div className='col-2'>{income.fromWhom}</div>
               <div className='col-3'>{income.incomeItems.map(item => item.name).join(', ')}</div>
-              <div className='col-2'>{new Date(income.transactionDate).toLocaleDateString()}</div>
-              <div className='col-2'>{income.amount}</div>
-              <div className='col-3'>{income.description}</div>
+              <div className='col-1'>{new Date(income.transactionDate).toLocaleDateString()}</div>
+              <div className='col-1'>{income.amount}</div>
+              <div className='col-2'>{income.description}</div>
             </div>
           </li>
         ))}
+        <li className={styles.totalRow}>
+          <div className='row'>
+            <div className='col-2'><b>Итого:</b></div>
+            <div className='col-3'></div>
+            <div className='col-1'></div>
+            <div className='col-1'><b>{totalAmount}</b></div>
+            <div className='col-2'></div>
+          </div>
+        </li>
       </ol>
     </Container>
   );
