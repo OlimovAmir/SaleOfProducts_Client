@@ -6,6 +6,7 @@ import nameCharacteristikReduce from './reducers/NameCharacteristikSlice.js';
 import addNameCharacteristicReducer from './reducers/AddNameCharacteristicSlice.js';
 import addSupplierReducer from './reducers/modalAddSupplierSlice.js';
 import infoGroupProductReducer from './reducers/modalInfoGroupProductSlice.js';
+import addCashIncomeReducer from './reducers/modalAddCashIncomeSlice.js';
 
 
 export const store = configureStore({
@@ -17,5 +18,6 @@ export const store = configureStore({
     addNameCharacteristic: addNameCharacteristicReducer,
     addSupplier: addSupplierReducer,
     infoGroupProduct: infoGroupProductReducer,
+    addCashIncome: addCashIncomeReducer,
   },
 });
