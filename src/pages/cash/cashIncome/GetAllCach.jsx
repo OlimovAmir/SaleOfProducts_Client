@@ -7,6 +7,9 @@ import { faFileExport, faList, faPrint } from '@fortawesome/free-solid-svg-icons
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import styles from './Cash.module.css'; // Assuming you have a CSS module for styling
+import { useDispatch } from 'react-redux';
+import { showModalAddCashIncome } from '../../../redux/reducers/modalAddCashIncomeSlice.js'; // Измените на правильный файл
+import FormAddCashIncome from './FormAddCashIncome.jsx';
 
 function GetAllCach() {
   const [cashIncomes, setCashIncomes] = useState([]);
@@ -61,6 +64,12 @@ function GetAllCach() {
     saveAs(blob, 'CashIncomes.xlsx');
   };
 
+  const dispatch = useDispatch();
+
+  const handleShowModal = () => {
+    dispatch(showModalAddCashIncome());
+  };
+
   return (
     <Container className={styles.wrapper}>
       <Form.Control
@@ -72,7 +81,7 @@ function GetAllCach() {
       />
       <div className={styles.title}>
         <h2>Список Наличных поступлений</h2>
-        <Button className='m-2' size="sm" variant="secondary">
+        <Button className='m-2' size="sm" variant="secondary" onClick={handleShowModal}>
           <FontAwesomeIcon icon={faList} /> Добавить новой записи
         </Button>
         <Button className='m-2' size="sm" variant="secondary" onClick={handleExport}>
@@ -82,7 +91,7 @@ function GetAllCach() {
           <FontAwesomeIcon icon={faPrint} /> Печать
         </Button>
       </div>
-
+      <FormAddCashIncome />
       <ol>
         <div className='row'>
           <div className='col-2'><b>От кого:</b></div>
