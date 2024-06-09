@@ -17,6 +17,16 @@ function DocumentCashIncome() {
                                 </Nav.Link>
                             </NavItem>
                             <NavItem>
+                                <Nav.Link eventKey='cashExpenses' className="nav-link" style={{ textAlign: 'left' }}>
+                                    {language === 'en' ? 'Get All Cash Expenses' : 'Список расходов'}
+                                </Nav.Link>
+                            </NavItem>
+                            <NavItem>
+                                <Nav.Link eventKey='journalCash' className="nav-link" style={{ textAlign: 'left' }}>
+                                    {language === 'en' ? 'Journal Cash' : 'Кассовый Журнал'}
+                                </Nav.Link>
+                            </NavItem>
+                            <NavItem>
                                 <Nav.Link eventKey='setting' className="nav-link" style={{ textAlign: 'left' }}>
                                     {language === 'en' ? 'Setting' : 'Настройка'}
                                 </Nav.Link>
@@ -28,7 +38,10 @@ function DocumentCashIncome() {
                             <TabPane eventKey='first'>
                                 <GetAllCach/>
                             </TabPane>
-                            <TabPane eventKey='getAll'>
+                            <TabPane eventKey='cashExpenses'>
+                                
+                            </TabPane>
+                            <TabPane eventKey='journalCash'>
                                 
                             </TabPane>
                             <TabPane eventKey='setting'>
