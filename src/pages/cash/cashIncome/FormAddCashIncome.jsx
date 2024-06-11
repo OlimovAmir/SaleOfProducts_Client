@@ -27,6 +27,10 @@ function FormAddCashIncome() {
   // Состояние для хранения списка должностей
   const [incomeItems, setIncomeItems] = useState([]);
 
+   // Состояние для отслеживания успешной отправки данных
+   const [isDataSent, setIsDataSent] = useState(false);
+
+
   // Обработчик события для обновления данных формы при изменении ввода
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +49,24 @@ function FormAddCashIncome() {
         console.error('Не удалось загрузить список должностей:', error);
       });
   }, []);
+
+  // Обработчик события для отправки данных формы на бэкенд
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Отправляем данные формы на бэкенд API с помощью Axios
+    axios.post('http://localhost:5134/IncomeItem/Create', formData)
+      .then(response => {
+        // Обработка успешного ответа
+        console.log('Данные успешно отправлены:', response.data);
+        setIsDataSent(true); // Устанавливаем флаг успешной отправки данных
+        // По желанию, можно сбросить форму здесь
+      })
+      .catch(error => {
+        // Обработка ошибки
+        console.error('Не удалось отправить данные:', error);
+      });
+  };
 
   return (
     <>
