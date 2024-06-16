@@ -16,20 +16,19 @@ function FormAddCashIncome() {
 
   // Состояние для хранения данных формы
   const [formData, setFormData] = useState({
+    transactionDate: '',
     amount: 0,
     description: '',
-    expenseItemId: '', // Идентификатор 
-    transactionDate: '', // Дата
-    fromWhom: '', //  от кого 
-    
+    fromWhom: '',
+    expenseItemId: '',
+    incomeItems: [{ name: '' }]
   });
 
   // Состояние для хранения списка должностей
   const [incomeItems, setIncomeItems] = useState([]);
 
-   // Состояние для отслеживания успешной отправки данных
-   const [isDataSent, setIsDataSent] = useState(false);
-
+  // Состояние для отслеживания успешной отправки данных
+  const [isDataSent, setIsDataSent] = useState(false);
 
   // Обработчик события для обновления данных формы при изменении ввода
   const handleInputChange = (e) => {
@@ -54,13 +53,19 @@ function FormAddCashIncome() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Преобразуем дату в формат UTC
+    const utcTransactionDate = new Date(formData.transactionDate).toISOString();
+
     // Отправляем данные формы на бэкенд API с помощью Axios
-    axios.post('http://localhost:5134/IncomeItem/Create', formData)
+    axios.post('http://localhost:5134/CashIncome/Create', {
+      ...formData,
+      transactionDate: utcTransactionDate
+    })
       .then(response => {
         // Обработка успешного ответа
         console.log('Данные успешно отправлены:', response.data);
         setIsDataSent(true); // Устанавливаем флаг успешной отправки данных
-        // По желанию, можно сбросить форму здесь
+        handleClose(); // Закрываем модальное окно
       })
       .catch(error => {
         // Обработка ошибки
@@ -71,70 +76,69 @@ function FormAddCashIncome() {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-      <br/>
-        <Form >
-          <Form.Group className="mb-3" controlId="formBasicName">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicDate">
+            <Form.Label>Transaction Date</Form.Label>
             <Form.Control
               type="date"
-              placeholder="Enter date"
-              name="date"
+              name="transactionDate"
+              value={formData.transactionDate}
+              onChange={handleInputChange}
             />
           </Form.Group>
-        </Form>
-        <Form >
+          
           <Form.Group className="mb-3" controlId="formBasicAmount">
+            <Form.Label>Amount</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Enter amount"
               name="amount"
+              value={formData.amount}
+              onChange={handleInputChange}
             />
           </Form.Group>
-        </Form>
-        <Form.Group className="mb-3" controlId="formBasicIncomeItemId">            
+
+          <Form.Group className="mb-3" controlId="formBasicExpenseItemId">
+            <Form.Label>Expense Item</Form.Label>
             <Form.Control
               as="select"
-              name="incomeItemId"
-              value={formData.incomeItemId}
+              name="expenseItemId"
+              value={formData.expenseItemId}
               onChange={handleInputChange}
             >
-              <option value="">Select incomeItem</option>
+              <option value="">Select expense item</option>
               {incomeItems.map(incomeItem => (
                 <option key={incomeItem.id} value={incomeItem.id}>{incomeItem.name}</option>
               ))}
             </Form.Control>
           </Form.Group>
-        
 
-        <Form >
           <Form.Group className="mb-3" controlId="formBasicDescription">
+            <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter description"
-              name="text"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
             />
           </Form.Group>
-        </Form>
 
-        <Form >
           <Form.Group className="mb-3" controlId="formBasicFromWhom">
+            <Form.Label>From Whom</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter fromWhom"
               name="fromWhom"
+              value={formData.fromWhom}
+              onChange={handleInputChange}
             />
           </Form.Group>
-        </Form>
 
-       
-
-        <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" type="submit">
             Save
           </Button>
-        </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
