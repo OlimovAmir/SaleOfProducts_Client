@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { Col, Nav, NavItem, Row, TabContainer, TabContent, TabPane } from 'react-bootstrap';
 import GetAllCach from './GetAllCach';
+import GetAllExpense from '../cashExpense/GetAllExpense';
 
 function DocumentCashIncome() {
   const language = useSelector(state => state.language.value);
@@ -39,7 +40,7 @@ function DocumentCashIncome() {
                                 <GetAllCach/>
                             </TabPane>
                             <TabPane eventKey='cashExpenses'>
-                                
+                                <GetAllExpense/>
                             </TabPane>
                             <TabPane eventKey='journalCash'>
                                 
