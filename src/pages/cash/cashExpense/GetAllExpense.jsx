@@ -91,7 +91,7 @@ function GetAllExpense() {
             <FontAwesomeIcon icon={faPrint} /> Печать
           </Button>
         </div>
-        {"<FormAddCashIncome />"}
+        
         <ol>
           <div className='row'>
             <div className='col-2'><b>От кого:</b></div>

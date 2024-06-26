@@ -20,11 +20,11 @@ function FormAddCashIncome() {
     amount: 0,
     description: '',
     fromWhom: '',
-    expenseItemId: '',
+    incomeItemId: '',
     incomeItems: [{ name: '' }]
   });
 
-  // Состояние для хранения списка должностей
+  // Состояние для хранения списка прихода
   const [incomeItems, setIncomeItems] = useState([]);
 
   // Состояние для отслеживания успешной отправки данных
@@ -38,7 +38,7 @@ function FormAddCashIncome() {
 
   // Загрузка списка должностей при монтировании компонента
   useEffect(() => {
-    // Запрос к API для получения списка должностей
+    // Запрос к API для получения списка Статьи прихода
     axios.get('http://localhost:5134/IncomeItem/AllItems')
       .then(response => {
         // Установка списка должностей в состояние
@@ -56,11 +56,17 @@ function FormAddCashIncome() {
     // Преобразуем дату в формат UTC
     const utcTransactionDate = new Date(formData.transactionDate).toISOString();
 
-    // Отправляем данные формы на бэкенд API с помощью Axios
-    axios.post('http://localhost:5134/CashIncome/Create', {
+    // Данные формы для отправки
+    const dataToSend = {
       ...formData,
       transactionDate: utcTransactionDate
-    })
+    };
+
+    // Вывод данных формы в консоль для проверки
+    console.log('Data to send:', dataToSend);
+
+    // Отправляем данные формы на бэкенд API с помощью Axios
+    axios.post('http://localhost:5134/CashIncome/Create', dataToSend)
       .then(response => {
         // Обработка успешного ответа
         console.log('Данные успешно отправлены:', response.data);
@@ -86,7 +92,7 @@ function FormAddCashIncome() {
               onChange={handleInputChange}
             />
           </Form.Group>
-          
+
           <Form.Group className="mb-3" controlId="formBasicAmount">
             <Form.Label>Amount</Form.Label>
             <Form.Control
@@ -98,14 +104,14 @@ function FormAddCashIncome() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicExpenseItemId">
-            <Form.Label>Expense Item</Form.Label>
+            <Form.Label>Income Item</Form.Label>
             <Form.Control
               as="select"
-              name="expenseItemId"
-              value={formData.expenseItemId}
+              name="incomeItemId"
+              value={formData.incomeItemId}
               onChange={handleInputChange}
             >
-              <option value="">Select expense item</option>
+              <option value="">Select income item</option>
               {incomeItems.map(incomeItem => (
                 <option key={incomeItem.id} value={incomeItem.id}>{incomeItem.name}</option>
               ))}
