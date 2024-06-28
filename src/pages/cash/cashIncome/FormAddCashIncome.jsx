@@ -36,16 +36,16 @@ function FormAddCashIncome() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Загрузка списка должностей при монтировании компонента
+  // Загрузка списка при монтировании компонента
   useEffect(() => {
     // Запрос к API для получения списка Статьи прихода
     axios.get('http://localhost:5134/IncomeItem/AllItems')
       .then(response => {
-        // Установка списка должностей в состояние
+        // Установка списка в состояние
         setIncomeItems(response.data);
       })
       .catch(error => {
-        console.error('Не удалось загрузить список должностей:', error);
+        console.error('Не удалось загрузить список:', error);
       });
   }, []);
 
@@ -70,6 +70,9 @@ function FormAddCashIncome() {
       .then(response => {
         // Обработка успешного ответа
         console.log('Данные успешно отправлены:', response.data);
+        if (response.data && response.data.cashIncomeId) {
+          console.log('Создан новый CashIncomeId:', response.data.cashIncomeId);
+        }
         setIsDataSent(true); // Устанавливаем флаг успешной отправки данных
         handleClose(); // Закрываем модальное окно
       })
@@ -103,7 +106,7 @@ function FormAddCashIncome() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicExpenseItemId">
+          <Form.Group className="mb-3" controlId="formBasicIncomeItemId">
             <Form.Label>Income Item</Form.Label>
             <Form.Control
               as="select"
